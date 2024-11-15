@@ -1,19 +1,56 @@
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+
 const Sidebar = () => {
+    const [activeMenu, setActiveMenu] = useState(null);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const location = useLocation();
+
+    const handleMenuClick = (menuIndex) => {
+        setActiveMenu(activeMenu === menuIndex ? null : menuIndex);
+    };
+
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
+    const isActive = (path) => location.pathname === path;
+
     return (
-        <div class="sidebar" id="sidebar">
-            <div class="sidebar-inner slimscroll">
-                <div id="sidebar-menu" class="sidebar-menu">
+        <div className={`sidebar ${isSidebarOpen ? "" : "mini-sidebar"}`} id="sidebar">
+            <div className="sidebar-inner slimscroll">
+                <div id="sidebar-menu" className="sidebar-menu">
                     <ul>
-                        <li class="menu-title">
+                        <li className="menu-title">
                             <span>Main Menu</span>
                         </li>
-                        <li class="submenu active">
-                            <a href="#"><i class="feather-grid"></i> <span> Dashboard</span> <span
-                                    class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="index.html" class="active">Admin Dashboard</a></li>
-                                <li><a href="teacher-dashboard.html">Teacher Dashboard</a></li>
-                                <li><a href="student-dashboard.html">Student Dashboard</a></li>
+                        <li className={`submenu ${activeMenu === 0 ? "active" : ""}`}>
+                            <a
+                                href="#"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    handleMenuClick(0);
+                                }}
+                            >
+                                <i className="feather-grid"></i> <span> Dashboard</span>
+                                <span className="menu-arrow"></span>
+                            </a>
+                            <ul style={{ display: activeMenu === 0 ? "block" : "none" }}>
+                                <li>
+                                    <Link to="/" className={`menu-item ${isActive("/") ? "active" : ""}`}>
+                                        Admin Dashboard
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/teacher-dashboard" className={`menu-item ${isActive("/teacher-dashboard") ? "active" : ""}`}>
+                                        Teacher Dashboard
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/student-dashboard" className={`menu-item ${isActive("/student-dashboard") ? "active" : ""}`}>
+                                        Student Dashboard
+                                    </Link>
+                                </li>
                             </ul>
                         </li>
                         <li class="submenu">

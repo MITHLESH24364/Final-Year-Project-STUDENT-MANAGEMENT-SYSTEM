@@ -1,24 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import Footer from './components/Footer';
-
-
+// src/App.jsx
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AdminDashboard from './pages/AdminDashboard'; 
+import StudentDashboard from './pages/StudentDashboard';  
+import Layout from './theme/Layout';
+import TeacherDashboard from './pages/TeacherDashboard';
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <Header></Header>
-      <Sidebar></Sidebar>
-      <Footer></Footer>
-
-    </>
-  )
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<AdminDashboard />} />
+                    <Route path="teacher-dashboard" element={<TeacherDashboard />} />
+                    <Route path="student-dashboard" element={<StudentDashboard />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
-export default App
+export default App;
