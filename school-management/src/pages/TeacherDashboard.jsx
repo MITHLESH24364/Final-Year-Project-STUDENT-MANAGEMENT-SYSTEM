@@ -1,16 +1,10 @@
-import React from "react";
-import SimpleCalendar from "simple-calendar-react-library";
-// import "simple-calendar-react-library/dist/index.css";
+import React from 'react'
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-// import "react-circular-progressbar/dist/styles.css";
-
 const TeacherDashboard = () => {
   return (
-    <div className="main-wrapper">
-      <div className="page-wrapper">
-        <div className="content container-fluid">
-          {/* Page Header */}
-          <div className="page-header">
+    <div>
+  {/* Page Header */}
+  <div className="page-header">
             <div className="row">
               <div className="col-sm-12">
                 <div className="page-sub-header">
@@ -24,8 +18,9 @@ const TeacherDashboard = () => {
             </div>
           </div>
 
-          {/* Dashboard Stats */}
-          <div className="row">
+
+           {/* Dashboard Stats */}
+           <div className="row">
             {[
               { title: "Total Classes", count: "04/06", icon: "teacher-icon-01.svg" },
               { title: "Total Students", count: "40/60", icon: "dash-icon-01.svg" },
@@ -53,8 +48,8 @@ const TeacherDashboard = () => {
             ))}
           </div>
 
-          {/* Main Content */}
-          <div className="row">
+ {/* Main Content */}
+ <div className="row">
             {/* Upcoming Lessons */}
             <div className="col-12 col-lg-8 col-xl-8 d-flex">
               <div className="card flex-fill comman-shadow">
@@ -70,7 +65,7 @@ const TeacherDashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="pt-3 pb-3">
+          <div className="pt-3 pb-3">
                   <div className="table-responsive lesson">
                     <table className="table table-center">
                       <tbody>
@@ -105,11 +100,13 @@ const TeacherDashboard = () => {
                     </table>
                   </div>
                 </div>
-              </div>
+
+                </div>
+            </div>
             </div>
 
-            {/* Semester Progress */}
-            <div className="col-12 col-lg-4 col-xl-4 d-flex">
+             {/* Semester Progress */}
+             <div className="col-12 col-lg-4 col-xl-4 d-flex">
               <div className="card flex-fill comman-shadow">
                 <div className="card-header">
                   <h5 className="card-title">Semester Progress</h5>
@@ -129,55 +126,9 @@ const TeacherDashboard = () => {
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Teaching Activity */}
-          <div className="row">
-            <div className="col-12 col-lg-12 col-xl-12 d-flex">
-              <div className="card flex-fill comman-shadow">
-                <div className="card-header">
-                  <div className="row align-items-center">
-                    <div className="col-6">
-                      <h5 className="card-title">Teaching Activity</h5>
-                    </div>
-                    <div className="col-6">
-                      <ul className="chart-list-out">
-                        <li><span className="circle-blue"></span>Teacher</li>
-                        <li><span className="circle-green"></span>Students</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div className="card-body">
-                  {/* Placeholder for chart */}
-                  <div id="school-area">Chart Goes Here</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Calendar */}
-            <div className="col-12 col-lg-12 col-xl-4 d-flex">
-              <div className="card flex-fill comman-shadow">
-                <div className="card-body">
-                  <SimpleCalendar
-                    activeMonth={new Date()}
-                    events={[
-                      {
-                        date: new Date(),
-                        title: "Botany Class",
-                        description: "Lorem ipsum sit amet",
-                      },
-                    ]}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
     </div>
-  );
-};
+  )
+}
 
 export default TeacherDashboard;
