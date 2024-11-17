@@ -14,8 +14,10 @@
     "axios": "^1.7.7",
     "react": "^18.3.1",
     "react-apexcharts": "^1.5.0",
+    "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.0"
+    "react-router-dom": "^6.28.0",
+    "simple-calendar-react-library": "^0.3.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
