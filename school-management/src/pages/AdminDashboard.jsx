@@ -1,6 +1,90 @@
 import React from 'react'
-
+import Chart from 'react-apexcharts';
 const AdminDashboard = () => {
+
+    const chartOptions = {
+        chart: {
+          type: "area", // For Spline chart
+        },
+        series: [
+          {
+            name: "Teachers",
+            data: [42, 60, 75, 70, 50, 42, 30], // Data for Teachers
+          },
+          {
+            name: "Students",
+            data: [30, 45, 55, 65, 52, 52, 40], // Data for Students
+          },
+        ],
+        xaxis: {
+          categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"], // Months as X-axis
+        },
+        stroke: {
+          curve: "smooth", // Spline effect
+        },
+        legend: {
+          position: "top", // Legend at the top
+        },
+        dataLabels: {
+          enabled: false, // Disable data labels
+        },
+        tooltip: {
+          shared: true, // Show both series in the tooltip
+          intersect: false,
+        },
+        colors: ["#4F46E5", "#2DD4BF"], // Custom colors for series
+        fill: {
+          type: "gradient",
+          gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.4,
+            opacityTo: 0.2,
+          },
+        },
+      };
+
+      const chartOptions1 = {
+        chart: {
+          type: "bar", // Bar chart type
+          stacked: false, // Disable stacking for grouped bars
+        },
+        series: [
+          {
+            name: "Girls",
+            data: [400, 600, 500, 700, 600, 500, 650], // Data for Girls
+          },
+          {
+            name: "Boys",
+            data: [300, 500, 450, 600, 550, 470, 620], // Data for Boys
+          },
+        ],
+        xaxis: {
+          categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"], // X-axis categories (Months)
+        },
+        colors: ["#4F46E5", "#2DD4BF"], // Custom colors for series
+        dataLabels: {
+          enabled: false, // Disable data labels
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false, // Vertical bars
+            columnWidth: "55%", // Adjust bar width
+            borderRadius: 4, // Rounded corners
+          },
+        },
+        legend: {
+          position: "top", // Place legend on top
+        },
+        tooltip: {
+          shared: true, // Show both series in the tooltip
+          intersect: false,
+        },
+        grid: {
+          borderColor: "#e0e0e0",
+          strokeDashArray: 4, // Dashed grid lines
+        },
+      };
+    
   return (
     <div>
         <div class="page-wrapper">
@@ -104,33 +188,50 @@ const AdminDashboard = () => {
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div id="apexcharts-area"></div>
+                            <Chart
+          options={chartOptions}
+          series={chartOptions.series}
+          type="area"
+          height="350"
+        />
                             </div>
                         </div>
 
                     </div>
                     <div class="col-md-12 col-lg-6">
 
-                        <div class="card card-chart">
-                            <div class="card-header">
-                                <div class="row align-items-center">
-                                    <div class="col-6">
-                                        <h5 class="card-title">Number of Students</h5>
-                                    </div>
-                                    <div class="col-6">
-                                        <ul class="chart-list-out">
-                                            <li><span class="circle-blue"></span>Girls</li>
-                                            <li><span class="circle-green"></span>Boys</li>
-                                            <li class="star-menus"><a href="javascript:;"><i
-                                                        class="fas fa-ellipsis-v"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div id="bar"></div>
-                            </div>
-                        </div>
+                    <div className="card card-chart">
+      <div className="card-header">
+        <div className="row align-items-center">
+          <div className="col-6">
+            <h5 className="card-title">Number of Students</h5>
+          </div>
+          <div className="col-6">
+            <ul className="chart-list-out">
+              <li>
+                <span className="circle-blue"></span>Girls
+              </li>
+              <li>
+                <span className="circle-green"></span>Boys
+              </li>
+              <li className="star-menus">
+                <a href="javascript:void(0);">
+                  <i className="fas fa-ellipsis-v"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div className="card-body">
+        <Chart
+          options={chartOptions1}
+          series={chartOptions1.series}
+          type="bar"
+          height="350"
+        />
+      </div>
+    </div>
 
                     </div>
                 </div>
