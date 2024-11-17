@@ -11,7 +11,7 @@ const Layout = () => {
             <Header />
             <div className="content-layout">
                 <Sidebar />
-                <div className="main-content">
+                <div className="main-content" style={{ marginBottom: '5%' }}>
                     <Outlet />
                     <Footer />
                 </div>
