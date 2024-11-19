@@ -1,5 +1,4 @@
 import React from 'react'
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 const TeacherDashboard = () => {
   return (
     <div>
@@ -105,27 +104,7 @@ const TeacherDashboard = () => {
             </div>
             </div>
 
-             {/* Semester Progress */}
-             <div className="col-12 col-lg-4 col-xl-4 d-flex">
-              <div className="card flex-fill comman-shadow">
-                <div className="card-header">
-                  <h5 className="card-title">Semester Progress</h5>
-                </div>
-                <div className="dash-widget">
-                  <CircularProgressbar
-                    value={92}
-                    text={`55/60`}
-                    styles={buildStyles({
-                      textSize: "16px",
-                      pathColor: "#4CAF50",
-                      textColor: "#4CAF50",
-                      trailColor: "#d6d6d6",
-                    })}
-                  />
-                  <p className="mt-3 text-center">Lesson Progressed</p>
-                </div>
-              </div>
-            </div>
+            
 
     </div>
   )

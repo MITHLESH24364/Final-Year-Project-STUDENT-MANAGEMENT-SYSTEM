@@ -31,7 +31,6 @@ const AddStudent = () => {
 
   return (
     <div className="main-content">
-      <div className="page-wrapper">
         <div className="content container-fluid">
           {/* Page Header */}
           <div className="page-header">
@@ -159,7 +158,6 @@ const AddStudent = () => {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 };
