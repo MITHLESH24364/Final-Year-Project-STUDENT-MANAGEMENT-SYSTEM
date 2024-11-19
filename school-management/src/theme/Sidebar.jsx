@@ -77,6 +77,8 @@ const Sidebar = () => {
                                     class="menu-arrow"></span></a>
                             <ul>
                                 <li><a href="">AddMarks</a></li>
+                                <li><a href="">View marks</a></li>
+                                <li><a href="">Print Report</a></li>
                                 
                             </ul>
                         </li>
