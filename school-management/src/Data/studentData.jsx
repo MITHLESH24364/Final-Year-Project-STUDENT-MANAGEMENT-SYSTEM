@@ -936,5 +936,5 @@ const studentData = [
 
 
 
-  export default students; studentData;
+  export default studentData;
   

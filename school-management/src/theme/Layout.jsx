@@ -9,7 +9,7 @@ const Layout = () => {
     return (
         <div className="app-container">
             <Header />
-            <div className="content-layout">
+            <div className="content-layout " >
                 <Sidebar />
                 <div className="main-content" style={{ marginBottom: '5%' }}>
                     <Outlet />

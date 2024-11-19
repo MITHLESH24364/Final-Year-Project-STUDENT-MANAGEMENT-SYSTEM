@@ -29,8 +29,7 @@ const AddStudent = () => {
   };
 
   return (
-    <div className="main-content">
-        <div className="content container-fluid">
+       <div>
           {/* Page Header */}
           <div className="page-header">
             <div className="row align-items-center">
@@ -326,8 +325,7 @@ const AddStudent = () => {
               </div>
             </div>
           </div>
-        </div>
-    </div>
+          </div>
   );
 };
 
