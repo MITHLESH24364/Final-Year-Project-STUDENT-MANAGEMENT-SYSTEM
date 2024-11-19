@@ -92,6 +92,11 @@ const MarksReport = () => {
                     <th>Maths</th>
                     <th>Science</th>
                     <th>English</th>
+                    <th>Nepali</th>
+                    <th>Computer</th>
+                    <th>Account</th>
+                    <th>Grade</th>
+
                   </tr>
                 </thead>
                 <tbody>
@@ -104,6 +109,11 @@ const MarksReport = () => {
                       <td>{item.maths}</td>
                       <td>{item.science}</td>
                       <td>{item.english}</td>
+                        <td>{item.nepali}</td>
+                        <td>{item.computer}</td>
+                        <td>{item.account}</td>
+                        <td>{item.grade}</td>
+                        
                     </tr>
                   ))}
                 </tbody>
