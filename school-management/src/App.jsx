@@ -5,6 +5,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import StudentDashboard from './pages/StudentDashboard';  
 import Layout from './theme/Layout';
 import TeacherDashboard from './pages/TeacherDashboard';
+import AddStudent from './pages/AddStudent';
 function App() {
     return (
         <BrowserRouter>
@@ -13,6 +14,8 @@ function App() {
                     <Route index element={<AdminDashboard />} />
                     <Route path="teacher-dashboard" element={<TeacherDashboard />} />
                     <Route path="student-dashboard" element={<StudentDashboard />} />
+                    <Route path="add-students" element={<AddStudent />} />
+
                 </Route>
             </Routes>
         </BrowserRouter>
