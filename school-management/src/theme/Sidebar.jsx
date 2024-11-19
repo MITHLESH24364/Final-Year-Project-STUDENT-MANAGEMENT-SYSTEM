@@ -54,7 +54,7 @@ const Sidebar = () => {
               },
               {
                 title: "Attendance",
-                icon: "fas fa-check",
+                icon: "fas fa-clipboard",
                 submenu: [{ path: "/add-attendance", label: "Attendance" }],
               },
               {
@@ -92,7 +92,7 @@ const Sidebar = () => {
               },
               {
                 title: "Invoices",
-                icon: "fas fa-clipboard",
+                icon: "fas fa-check",
                 submenu: [
                   { path: "/invoices", label: "Invoices List" },
                   { path: "/add-invoice", label: "Add Invoices" },
