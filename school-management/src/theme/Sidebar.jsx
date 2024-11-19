@@ -68,7 +68,15 @@ const Sidebar = () => {
                             <a href="#"><i class="fas fa-graduation-cap"></i> <span> Attendence</span> <span
                                     class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="students.html">Attendence</a></li>
+                                <li><a href="">Attendence</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><i class="fas fa-graduation-cap"></i> <span> Exams</span> <span
+                                    class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="">AddMarks</a></li>
                                 
                             </ul>
                         </li>
