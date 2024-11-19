@@ -15,7 +15,7 @@ function App() {
                     <Route path="teacher-dashboard" element={<TeacherDashboard />} />
                     <Route path="student-dashboard" element={<StudentDashboard />} />
                     <Route path="add-students" element={<AddStudent />} />
-
+             
                 </Route>
             </Routes>
         </BrowserRouter>

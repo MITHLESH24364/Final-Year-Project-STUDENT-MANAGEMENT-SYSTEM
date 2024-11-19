@@ -103,12 +103,6 @@ const TeacherDashboard = () => {
                 </div>
             </div>
             </div>
-
-<<<<<<< HEAD
-=======
-            
->>>>>>> aba3631b670ccc1532ecc34443474cffb493e64e
-
     </div>
   );
 };

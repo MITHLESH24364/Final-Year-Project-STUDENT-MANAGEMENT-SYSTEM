@@ -53,6 +53,7 @@ const Sidebar = () => {
                                 </li>
                             </ul>
                         </li>
+                        
                         <li class="submenu">
                             <a href="#"><i class="fas fa-graduation-cap"></i> <span> Students</span> <span
                                     class="menu-arrow"></span></a>
@@ -61,6 +62,14 @@ const Sidebar = () => {
                                 <li><a href="student-details.html">Student View</a></li>
                                 <li><a href="add-student.html">Student Add</a></li>
                                 <li><a href="edit-student.html">Student Edit</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><i class="fas fa-graduation-cap"></i> <span> Attendence</span> <span
+                                    class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="students.html">Attendence</a></li>
+                                
                             </ul>
                         </li>
                         <li class="submenu">
