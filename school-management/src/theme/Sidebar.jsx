@@ -46,7 +46,7 @@ const Sidebar = () => {
                 title: "Students",
                 icon: "fas fa-graduation-cap",
                 submenu: [
-                  { path: "/students", label: "Student List" },
+                  { path: "/view-students", label: "Student List" },
                   { path: "/student-details", label: "Student View" },
                   { path: "/add-students", label: "Student Add" },
                   { path: "/edit-student", label: "Student Edit" },
@@ -60,7 +60,10 @@ const Sidebar = () => {
               {
                 title: "Exams",
                 icon: "fas fa-book",
-                submenu: [{ path: "/add-marks", label: "Add Marks" }],
+                submenu: [
+                  { path: "/add-marks", label: "Add Marks" },
+                  { path: "/marks-report", label: "Report" }
+                ],
               },
               {
                 title: "Teachers",

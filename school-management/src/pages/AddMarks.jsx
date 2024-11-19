@@ -1,40 +1,76 @@
 import React, { useState } from "react";
-import students from "../Data/students";
+import studentData from "../Data/studentData"; // Import the student data file
 
 const AddMarks = () => {
   // States for form controls
-  const [exam, setExam] = useState('');
-  const [classLevel, setClassLevel] = useState('');
-  const [section, setSection] = useState('');
-  const [year, setYear] = useState('');
-  const [subject, setSubject] = useState('');
+  const [exam, setExam] = useState("");
+  const [classLevel, setClassLevel] = useState("");
+  const [section, setSection] = useState("");
+  const [year, setYear] = useState("");
+  const [subject, setSubject] = useState("");
+
+  // State to store marks input values and errors
+  const [marks, setMarks] = useState({});
+  const [errors, setErrors] = useState({});
+
+  // Determine max marks based on exam term
+  const getMaxMarks = () => {
+    if (exam.includes("pr")) return 25; // Practical exam
+    return 75; // Theory exam
+  };
 
   // Filter students based on class and section
-  const filteredStudents = students.filter(student => 
-    (student.class === classLevel && student.section === section) || !classLevel || !section
+  const filteredStudents = studentData.filter(
+    (student) =>
+      (student.class === classLevel && student.section === section) ||
+      !classLevel ||
+      !section
   );
 
-  // State to store marks input values
-  const [marks, setMarks] = useState({});
-
-  // Handle input changes for marks
+  // Handle marks input change
   const handleMarksChange = (id, value) => {
-    setMarks(prevMarks => ({
+    const maxMarks = getMaxMarks();
+    const numericValue = Number(value);
+
+    // Check for errors
+    if (numericValue > maxMarks) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [id]: `Marks cannot exceed ${maxMarks}`,
+      }));
+    } else {
+      setErrors((prevErrors) => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors[id];
+        return updatedErrors;
+      });
+    }
+
+    // Update marks
+    setMarks((prevMarks) => ({
       ...prevMarks,
       [id]: value,
     }));
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic
+
+    // Ensure no errors before submission
+    const hasErrors = Object.keys(errors).length > 0;
+    if (hasErrors) {
+      alert("Please fix the errors before submitting.");
+      return;
+    }
+
     const resultData = {
       exam,
       classLevel,
       section,
       year,
       subject,
-      marks
+      marks,
     };
     console.log(resultData);
     // Replace console.log with actual submission logic (e.g., API call)
@@ -50,23 +86,27 @@ const AddMarks = () => {
                 <div className="page-sub-header">
                   <h3 className="page-title">Student Marks</h3>
                   <ul className="breadcrumb">
-                    <li className="breadcrumb-item"><a href="students.html">Student</a></li>
+                    <li className="breadcrumb-item">
+                      <a href="students.html">Student</a>
+                    </li>
                     <li className="breadcrumb-item active">Marks Add/Edit</li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
-          
-          {/* Filter Section for Class, Section, Exam Term, Year, and Subject */}
+
+          {/* Filter Section */}
           <form onSubmit={handleSubmit}>
             <div className="row mb-3">
               <div className="col-md-2">
-                <label htmlFor="classSelect" className="form-label">Class</label>
-                <select 
-                  className="form-control" 
-                  id="classSelect" 
-                  value={classLevel} 
+                <label htmlFor="classSelect" className="form-label">
+                  Class
+                </label>
+                <select
+                  className="form-control"
+                  id="classSelect"
+                  value={classLevel}
                   onChange={(e) => setClassLevel(e.target.value)}
                 >
                   <option value="">Select Class</option>
@@ -84,11 +124,13 @@ const AddMarks = () => {
               </div>
 
               <div className="col-md-2">
-                <label htmlFor="sectionSelect" className="form-label">Section</label>
-                <select 
-                  className="form-control" 
-                  id="sectionSelect" 
-                  value={section} 
+                <label htmlFor="sectionSelect" className="form-label">
+                  Section
+                </label>
+                <select
+                  className="form-control"
+                  id="sectionSelect"
+                  value={section}
                   onChange={(e) => setSection(e.target.value)}
                 >
                   <option value="">Select Section</option>
@@ -101,28 +143,39 @@ const AddMarks = () => {
               </div>
 
               <div className="col-md-2">
-                <label htmlFor="examSelect" className="form-label">Exam Term</label>
-                <select 
-                  className="form-control" 
-                  id="examSelect" 
-                  value={exam} 
+                <label htmlFor="examSelect" className="form-label">
+                  Exam Term
+                </label>
+                <select
+                  className="form-control"
+                  id="examSelect"
+                  value={exam}
                   onChange={(e) => setExam(e.target.value)}
                 >
                   <option value="">Select Exam Term</option>
-                  <option value="first_term_th">First Term Examination (TH)</option>
-                  <option value="first_term_pr">First Term Examination (PR)</option>
-                  <option value="second_term_th">Second Term Examination (TH)</option>
-                  <option value="second_term_pr">Second Term Examination (PR)</option>
-
+                  <option value="first_term_th">
+                    First Term Examination (TH)
+                  </option>
+                  <option value="first_term_pr">
+                    First Term Examination (PR)
+                  </option>
+                  <option value="second_term_th">
+                    Second Term Examination (TH)
+                  </option>
+                  <option value="second_term_pr">
+                    Second Term Examination (PR)
+                  </option>
                 </select>
               </div>
 
               <div className="col-md-2">
-                <label htmlFor="yearSelect" className="form-label">Year</label>
-                <select 
-                  className="form-control" 
-                  id="yearSelect" 
-                  value={year} 
+                <label htmlFor="yearSelect" className="form-label">
+                  Year
+                </label>
+                <select
+                  className="form-control"
+                  id="yearSelect"
+                  value={year}
                   onChange={(e) => setYear(e.target.value)}
                 >
                   <option value="">Select Year</option>
@@ -132,11 +185,13 @@ const AddMarks = () => {
               </div>
 
               <div className="col-md-2">
-                <label htmlFor="subjectSelect" className="form-label">Subject</label>
-                <select 
-                  className="form-control" 
-                  id="subjectSelect" 
-                  value={subject} 
+                <label htmlFor="subjectSelect" className="form-label">
+                  Subject
+                </label>
+                <select
+                  className="form-control"
+                  id="subjectSelect"
+                  value={subject}
                   onChange={(e) => setSubject(e.target.value)}
                 >
                   <option value="">Select Subject</option>
@@ -161,11 +216,11 @@ const AddMarks = () => {
             {classLevel && section && exam && subject && year && (
               <div className="table-container">
                 <table className="table table-hover table-bordered">
-                  <thead className="fixed-header">
+                  <thead>
                     <tr>
                       <th>Name</th>
                       <th>Student ID</th>
-                      <th>Marks (75)</th>
+                      <th>Marks (Max {getMaxMarks()})</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -177,10 +232,16 @@ const AddMarks = () => {
                           <input
                             type="number"
                             className="form-control"
-                            value={marks[student.id] || ''}
-                            placeholder="Enter marks"
-                            onChange={(e) => handleMarksChange(student.id, e.target.value)}
+                            value={marks[student.id] || ""}
+                            onChange={(e) =>
+                              handleMarksChange(student.id, e.target.value)
+                            }
                           />
+                          {errors[student.id] && (
+                            <small className="text-danger">
+                              {errors[student.id]}
+                            </small>
+                          )}
                         </td>
                       </tr>
                     ))}
@@ -191,7 +252,9 @@ const AddMarks = () => {
 
             {/* Submit Button */}
             <div className="mt-4 text-end">
-              <button type="submit" className="btn btn-primary">Save Results</button>
+              <button type="submit" className="btn btn-primary">
+                Save Results
+              </button>
             </div>
           </form>
         </div>
@@ -201,4 +264,3 @@ const AddMarks = () => {
 };
 
 export default AddMarks;
-

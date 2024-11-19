@@ -1,32 +1,6 @@
 // studentData.js
 const studentData = [
-    {
-        id: 1,
-        class: "10",
-        section: "A",
-        name: "Mithlesh Kumar Singh",
-        roll: 1,
-        present: false,
-        late: false,
-      },
-      {
-        id: 2,
-        class: "10",
-        section: "B",
-        name: "Mithlesh Kumar Singh",
-        roll: 2,
-        present: false,
-        late: false,
-      },
-      {
-        id: 3,
-        class: "10",
-        section: "C",
-        name: "Mithlesh Kumar Singh",
-        roll: 3,
-        present: false,
-        late: false,
-      },
+    
       {
           "id": 1,
           "class": "8",

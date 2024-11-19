@@ -8,6 +8,9 @@ import TeacherDashboard from './pages/TeacherDashboard';
 import AddStudent from './pages/AddStudent';
 import AddMarks from './pages/AddMarks';
 import AddAttendance from './pages/AddAttendance';
+import ViewStudents from './pages/ViewStudents';
+import MarksReport from './pages/MarksReport';
+
 
 function App() {
     return (
@@ -19,7 +22,9 @@ function App() {
                     <Route path="student-dashboard" element={<StudentDashboard />} />
                     <Route path="add-students" element={<AddStudent />} />
                     <Route path="add-marks" element={<AddMarks />} />
-                    <Route path="add-attendance" element={<AddAttendance />} />            
+                    <Route path="add-attendance" element={<AddAttendance />} />    
+                    <Route path="view-students" element={<ViewStudents />} />   
+                    <Route path="marks-report" element={<MarksReport />} />  
                 </Route>
             </Routes>
         </BrowserRouter>
