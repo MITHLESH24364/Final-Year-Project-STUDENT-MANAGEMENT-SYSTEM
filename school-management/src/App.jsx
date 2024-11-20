@@ -12,6 +12,7 @@ import ViewStudents from './pages/ViewStudents';
 import MarksReport from './pages/MarksReport';
 import StudentDetailsModal from './pages/StudentDetailsModal';
 import ReportCard from './pages/ReportCard';
+import AbsentStudents from './pages/AbsentStudents';
 
 
 
@@ -31,6 +32,7 @@ function App() {
                     <Route path="marks-report" element={<MarksReport />} />
                     <Route parh="student-details" element={<StudentDetailsModal />} />
                     <Route path="report-card" element={<ReportCard />} />
+                    <Route path="absent-students" element={<AbsentStudents />} />
                 </Route>
             </Routes>
         </BrowserRouter>

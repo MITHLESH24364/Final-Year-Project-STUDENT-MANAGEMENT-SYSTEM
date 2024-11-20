@@ -55,7 +55,9 @@ const Sidebar = () => {
               {
                 title: "Attendance",
                 icon: "fas fa-clipboard",
-                submenu: [{ path: "/add-attendance", label: "Attendance" }],
+                submenu: [{ path: "/add-attendance", label: "Attendance" },
+                  { path: "/absent-students", label: "Absent Students" },
+                ],
               },
               {
                 title: "Exams",
