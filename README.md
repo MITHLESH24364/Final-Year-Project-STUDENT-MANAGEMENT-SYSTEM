@@ -24,5 +24,6 @@ The **Student Management System (SMS)** is a web-based application designed to s
 ## Setup and Installation
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/student-management-system.git
-   cd student-management-system
+   git clone https://github.com/MITHLESH24364/Final-Year-Project-STUDENT-MANAGEMENT-SYSTEM.git
+   cd student-management
+   npm run dev
