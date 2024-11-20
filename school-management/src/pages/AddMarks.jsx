@@ -27,32 +27,44 @@ const AddMarks = () => {
       !section
   );
 
+  
+
+
   // Handle marks input change
-  const handleMarksChange = (id, value) => {
-    const maxMarks = getMaxMarks();
-    const numericValue = Number(value);
+const handleMarksChange = (id, value) => {
+  const maxMarks = getMaxMarks();
+  const numericValue = Number(value);
 
-    // Prevent input of marks greater than maxMarks
-    if (numericValue > maxMarks) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        [id]: `Marks cannot exceed ${maxMarks}`,
-      }));
-      return; // Do not update state if marks exceed maxMarks
-    } else {
-      setErrors((prevErrors) => {
-        const updatedErrors = { ...prevErrors };
-        delete updatedErrors[id];
-        return updatedErrors;
-      });
-    }
-
-    // Update marks
-    setMarks((prevMarks) => ({
-      ...prevMarks,
-      [id]: value,
+  // Check if the value is less than 0 or greater than the maxMarks
+  if (numericValue < 0) {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [id]: `Marks cannot be less than 0`,
     }));
-  };
+    return;
+  } else if (numericValue > maxMarks) {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [id]: `Marks cannot exceed ${maxMarks}`,
+    }));
+    return;
+  } else {
+    // Remove error if the value is valid
+    setErrors((prevErrors) => {
+      const updatedErrors = { ...prevErrors };
+      delete updatedErrors[id];
+      return updatedErrors;
+    });
+  }
+
+  // Update marks
+  setMarks((prevMarks) => ({
+    ...prevMarks,
+    [id]: value,
+  }));
+};
+
+
 
   // Handle form submission
   const handleSubmit = (e) => {
@@ -227,15 +239,18 @@ const AddMarks = () => {
                         <td>{student.name}</td>
                         <td>{student.id}</td>
                         <td>
+                        
+
                           <input
                             type="number"
                             className="form-control"
                             value={marks[student.id] || ""}
-                            onChange={(e) =>
-                              handleMarksChange(student.id, e.target.value)
-                            }
+                            onChange={(e) => handleMarksChange(student.id, e.target.value)}
+                            min={0} // Prevent entering marks less than 0
                             max={getMaxMarks()} // Restrict input directly in the field
                           />
+
+
                           {errors[student.id] && (
                             <small className="text-danger">
                               {errors[student.id]}
