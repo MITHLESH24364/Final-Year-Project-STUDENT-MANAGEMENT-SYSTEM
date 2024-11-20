@@ -325,19 +325,14 @@ const ReportCard = () => {
                   value={exam}
                   onChange={(e) => setExam(e.target.value)}
                 >
-                  <option value="">Select Exam Term</option>
-                  {["First Term Examination", "Second Term Examination"].map(
-                    (term, idx) => (
-                      <React.Fragment key={idx}>
-                        <option value={`${term.toLowerCase()}_th`}>
-                          {term} (TH)
-                        </option>
-                        <option value={`${term.toLowerCase()}_pr`}>
-                          {term} (PR)
-                        </option>
-                      </React.Fragment>
-                    )
-                  )}
+                
+                <option value="">Select Exam Term</option>
+                {["First Term Examination", "Second Term Examination"].map((term, idx) => (
+                <option key={idx} value={term.toLowerCase()}>
+                    {term}
+                </option>
+                ))}
+
                 </select>
               </div>
 

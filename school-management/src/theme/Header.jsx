@@ -3,7 +3,7 @@ const Header = () => {
     <div class="header">
 
             <div class="header-left">
-                <a href="index.html" class="logo">
+                <a href="" class="logo">
                     <img src="assets/img/logo1.png" alt="Logo" />
                 </a>
                 <a href="index.html" class="logo logo-small">
