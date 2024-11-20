@@ -10,6 +10,9 @@ import AddMarks from './pages/AddMarks';
 import AddAttendance from './pages/AddAttendance';
 import ViewStudents from './pages/ViewStudents';
 import MarksReport from './pages/MarksReport';
+import StudentDetailsModal from './pages/StudentDetailsModal';
+import ReportCard from './pages/ReportCard';
+
 
 
 function App() {
@@ -24,7 +27,9 @@ function App() {
                     <Route path="add-marks" element={<AddMarks />} />
                     <Route path="add-attendance" element={<AddAttendance />} />    
                     <Route path="view-students" element={<ViewStudents />} />   
-                    <Route path="marks-report" element={<MarksReport />} />  
+                    <Route path="marks-report" element={<MarksReport />} />
+                    <Route parh="student-details" element={<StudentDetailsModal />} />
+                    <Route path="report-card" element={<ReportCard />} />
                 </Route>
             </Routes>
         </BrowserRouter>

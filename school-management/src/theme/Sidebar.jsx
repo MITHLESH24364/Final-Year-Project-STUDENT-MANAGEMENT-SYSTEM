@@ -62,7 +62,8 @@ const Sidebar = () => {
                 icon: "fas fa-book",
                 submenu: [
                   { path: "/add-marks", label: "Add Marks" },
-                  { path: "/marks-report", label: "Report" }
+                  { path: "/marks-report", label: "Report" },
+                  {path: "/report-card", label: "Report Card" },
                 ],
               },
               {

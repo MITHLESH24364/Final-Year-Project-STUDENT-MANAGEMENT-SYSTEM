@@ -137,3 +137,97 @@
   padding-top: 0;
   position: relative;
 }
+
+/* Report card css start */
+
+.main-wrapper {
+  font-family: Arial, sans-serif;
+}
+
+.page-wrapper {
+  padding: 20px;
+}
+
+.content.container-fluid {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.page-header {
+  margin-bottom: 20px;
+}
+
+.page-sub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.breadcrumb {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumb-item {
+  display: inline;
+  margin-right: 5px;
+}
+
+.breadcrumb-item a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.breadcrumb-item.active {
+  color: #6c757d;
+}
+
+.report-card {
+  margin-top: 20px;
+}
+
+.student-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.student-info p,
+.footer p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.exam-title {
+  text-align: center;
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.report-table th,
+.report-table td {
+  border: 1px solid #000;
+  text-align: center;
+  padding: 5px;
+}
+
+.report-table th {
+  background-color: #f2f2f2;
+}
+
+.footer {
+  margin-top: 20px;
+  text-align: right;
+}

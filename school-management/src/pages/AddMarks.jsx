@@ -32,12 +32,13 @@ const AddMarks = () => {
     const maxMarks = getMaxMarks();
     const numericValue = Number(value);
 
-    // Check for errors
+    // Prevent input of marks greater than maxMarks
     if (numericValue > maxMarks) {
       setErrors((prevErrors) => ({
         ...prevErrors,
         [id]: `Marks cannot exceed ${maxMarks}`,
       }));
+      return; // Do not update state if marks exceed maxMarks
     } else {
       setErrors((prevErrors) => {
         const updatedErrors = { ...prevErrors };
@@ -110,16 +111,11 @@ const AddMarks = () => {
                   onChange={(e) => setClassLevel(e.target.value)}
                 >
                   <option value="">Select Class</option>
-                  <option value="10">10</option>
-                  <option value="9">9</option>
-                  <option value="8">8</option>
-                  <option value="7">7</option>
-                  <option value="6">6</option>
-                  <option value="5">5</option>
-                  <option value="4">4</option>
-                  <option value="3">3</option>
-                  <option value="2">2</option>
-                  <option value="1">1</option>
+                  {[...Array(10)].map((_, i) => (
+                    <option key={i + 1} value={10 - i}>
+                      {10 - i}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -134,11 +130,11 @@ const AddMarks = () => {
                   onChange={(e) => setSection(e.target.value)}
                 >
                   <option value="">Select Section</option>
-                  <option value="A">A</option>
-                  <option value="B">B</option>
-                  <option value="C">C</option>
-                  <option value="D">D</option>
-                  <option value="E">E</option>
+                  {["A", "B", "C", "D", "E"].map((sec) => (
+                    <option key={sec} value={sec}>
+                      {sec}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -153,18 +149,18 @@ const AddMarks = () => {
                   onChange={(e) => setExam(e.target.value)}
                 >
                   <option value="">Select Exam Term</option>
-                  <option value="first_term_th">
-                    First Term Examination (TH)
-                  </option>
-                  <option value="first_term_pr">
-                    First Term Examination (PR)
-                  </option>
-                  <option value="second_term_th">
-                    Second Term Examination (TH)
-                  </option>
-                  <option value="second_term_pr">
-                    Second Term Examination (PR)
-                  </option>
+                  {["First Term Examination", "Second Term Examination"].map(
+                    (term, idx) => (
+                      <React.Fragment key={idx}>
+                        <option value={`${term.toLowerCase()}_th`}>
+                          {term} (TH)
+                        </option>
+                        <option value={`${term.toLowerCase()}_pr`}>
+                          {term} (PR)
+                        </option>
+                      </React.Fragment>
+                    )
+                  )}
                 </select>
               </div>
 
@@ -179,8 +175,11 @@ const AddMarks = () => {
                   onChange={(e) => setYear(e.target.value)}
                 >
                   <option value="">Select Year</option>
-                  <option value="2081">2081</option>
-                  <option value="2080">2080</option>
+                  {["2081", "2080"].map((yr) => (
+                    <option key={yr} value={yr}>
+                      {yr}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -195,19 +194,18 @@ const AddMarks = () => {
                   onChange={(e) => setSubject(e.target.value)}
                 >
                   <option value="">Select Subject</option>
-                  <option value="science">Science</option>
-                  <option value="math">Math</option>
-                  <option value="english">English</option>
-                  <option value="nepali">Nepali</option>
-                  <option value="social">Social</option>
-                  <option value="computer">Computer</option>
-                  <option value="health">Health</option>
-                  <option value="moral">Moral</option>
-                  <option value="opt_math">Optional Math</option>
-                  <option value="accountancy">Accountancy</option>
-                  <option value="opt_english">Optional English</option>
-                  <option value="opt_science">Optional Science</option>
-                  <option value="opt_computer">Optional Computer</option>
+                  {[
+                    "Science",
+                    "Math",
+                    "English",
+                    "Nepali",
+                    "Social",
+                    "Computer",
+                  ].map((sub) => (
+                    <option key={sub.toLowerCase()} value={sub.toLowerCase()}>
+                      {sub}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -236,6 +234,7 @@ const AddMarks = () => {
                             onChange={(e) =>
                               handleMarksChange(student.id, e.target.value)
                             }
+                            max={getMaxMarks()} // Restrict input directly in the field
                           />
                           {errors[student.id] && (
                             <small className="text-danger">
