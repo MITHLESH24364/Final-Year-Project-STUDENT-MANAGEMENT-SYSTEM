@@ -13,6 +13,7 @@ import MarksReport from './pages/MarksReport';
 import StudentDetailsModal from './pages/StudentDetailsModal';
 import ReportCard from './pages/ReportCard';
 import AbsentStudents from './pages/AbsentStudents';
+import AddTeacher from './pages/AddTeacher';
 
 
 
@@ -33,6 +34,7 @@ function App() {
                     <Route parh="student-details" element={<StudentDetailsModal />} />
                     <Route path="report-card" element={<ReportCard />} />
                     <Route path="absent-students" element={<AbsentStudents />} />
+                    <Route parh="add-teachers" element={<AddTeacher />} />
                 </Route>
             </Routes>
         </BrowserRouter>

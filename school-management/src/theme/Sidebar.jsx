@@ -73,7 +73,7 @@ const Sidebar = () => {
                 submenu: [
                   { path: "/teachers", label: "Teacher List" },
                   { path: "/teacher-details", label: "Teacher View" },
-                  { path: "/add-teacher", label: "Teacher Add" },
+                  { path: "/add-teachers", label: "Teacher Add" },
                   { path: "/edit-teacher", label: "Teacher Edit" },
                 ],
               },
