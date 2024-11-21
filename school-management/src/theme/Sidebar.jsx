@@ -30,7 +30,6 @@ const Sidebar = () => {
             <li className="menu-title">
               <span>Main Menu</span>
             </li>
-
             {/* Submenus */}
             {[
               {

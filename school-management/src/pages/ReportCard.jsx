@@ -3026,6 +3026,7 @@ const ReportCard = () => {
             <div className="report-cards-container">
               {filteredData.map((student, idx) => (
                 <div key={idx} className="report-card" style={{ marginBottom: "20px" }}>
+                    <br /><br />
                   {/* Header Section */}
                   <div className="student-info">
                     <div className="student-left">
