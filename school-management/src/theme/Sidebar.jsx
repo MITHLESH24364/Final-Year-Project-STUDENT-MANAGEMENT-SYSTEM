@@ -36,7 +36,7 @@ const Sidebar = () => {
                 title: "Dashboard",
                 icon: "feather-grid",
                 submenu: [
-                  { path: "/", label: "Admin Dashboard" },
+                  { path: "/admin-dashboard", label: "Admin Dashboard" },
                   { path: "/teacher-dashboard", label: "Teacher Dashboard" },
                   { path: "/student-dashboard", label: "Student Dashboard" },
                 ],
@@ -71,7 +71,7 @@ const Sidebar = () => {
                 title: "Teachers",
                 icon: "fas fa-chalkboard-teacher",
                 submenu: [
-                  { path: "/teachers", label: "Teacher List" },
+                  { path: "/view-teachers", label: "Teacher List" },
                   { path: "/teacher-details", label: "Teacher View" },
                   { path: "/add-teachers", label: "Teacher Add" },
                   { path: "/edit-teacher", label: "Teacher Edit" },

@@ -232,4 +232,19 @@
   text-align: right;
 }
 
+/* view teacher filter css */
 
+.filter select {
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.view-switcher .btn {
+  margin-right: 10px;
+}
+.fit{
+  display: flex;
+      justify-content: space-between;
+      width: 100%;
+}
