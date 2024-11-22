@@ -248,3 +248,26 @@
       justify-content: space-between;
       width: 100%;
 }
+
+
+@media print {
+  body * {
+    visibility: hidden; /* Hide everything */
+  }
+  
+  .report-cards-container, .report-card, .report-table, .student-info {
+    visibility: visible; /* Only show the report cards */
+  }
+
+  .report-card {
+    page-break-after: always; /* Ensure that each report card is printed on a new page */
+  }
+
+  .page-header, .content, .main-wrapper {
+    display: none; /* Hide header, navigation, etc. */
+  }
+
+  .print-button {
+    display: none; /* Hide the print button */
+  }
+}

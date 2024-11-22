@@ -139,7 +139,7 @@ const Header = () => {
                 <li class="nav-item dropdown has-arrow new-user-menus">
                     <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                         <span class="user-img">
-                            <img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31"
+                            <img class="rounded-circle" src="assets/img/profiles/avatar-01.png" width="31"
                                 alt="Soeng Souy"/>
                             <div class="user-text">
                                 <h6>MITHLESH KUMAR SINGH</h6>
@@ -150,7 +150,7 @@ const Header = () => {
                     <div class="dropdown-menu">
                         <div class="user-header">
                             <div class="avatar avatar-sm">
-                                <img src="assets/img/profiles/avatar-01.jpg" alt="User Image"
+                                <img src="assets/img/profiles/avatar-01.png" alt="User Image"
                                     class="avatar-img rounded-circle"/>
                             </div>
                             <div class="user-text">
