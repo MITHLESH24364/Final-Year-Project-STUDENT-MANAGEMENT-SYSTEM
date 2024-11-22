@@ -272,7 +272,7 @@ const AbsentStudents = () => {
           </div>
 
           {/* Navigation Tabs */}
-          <div className="d-flex justify-content-between align-items-center mb-4">
+          {/* <div className="d-flex justify-content-between align-items-center mb-4">
             <ul className="nav nav-tabs">
               {[
                 "Add/Edit",
@@ -296,7 +296,7 @@ const AbsentStudents = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           {/* Filter Section */}
           <div className="filter-section mb-4">
