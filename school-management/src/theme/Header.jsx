@@ -1,9 +1,14 @@
 const Header = () => {
+    const logout = () => {
+        localStorage.removeItem("isLogin");
+        window.location.href = "/";
+      };
+
   return (
     <div class="header">
 
             <div class="header-left">
-                <a href="" class="logo">
+                <a href="/" class="logo">
                     <img src="assets/img/logo1.png" alt="Logo" />
                 </a>
                 <a href="index.html" class="logo logo-small">
@@ -145,6 +150,8 @@ const Header = () => {
                                 <h6>MITHLESH KUMAR SINGH</h6>
                                 <p class="text-muted mb-0">Administrator</p>
                             </div>
+                            <button onClick={logout} class="btn btn-danger" href=""> <i class="fas fa-sign-out-alt"></i></button>
+
                         </span>
                     </a>
                     <div class="dropdown-menu">

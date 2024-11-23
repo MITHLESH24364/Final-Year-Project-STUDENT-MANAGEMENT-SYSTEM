@@ -36,7 +36,7 @@ const Sidebar = () => {
                 title: "Dashboard",
                 icon: "feather-grid",
                 submenu: [
-                  { path: "/admin-dashboard", label: "Admin Dashboard" },
+                  { path: "/", label: "Admin Dashboard" },
                   { path: "/teacher-dashboard", label: "Teacher Dashboard" },
                   { path: "/student-dashboard", label: "Student Dashboard" },
                 ],
@@ -46,9 +46,9 @@ const Sidebar = () => {
                 icon: "fas fa-graduation-cap",
                 submenu: [
                   { path: "/view-students", label: "Student List" },
-                  { path: "/student-details", label: "Student View" },
+                  { path: "#", label: "Student View" },
                   { path: "/add-students", label: "Student Add" },
-                  { path: "/edit-student", label: "Student Edit" },
+                  { path: "#", label: "Student Edit" },
                 ],
               },
               {
@@ -72,35 +72,35 @@ const Sidebar = () => {
                 icon: "fas fa-chalkboard-teacher",
                 submenu: [
                   { path: "/view-teachers", label: "Teacher List" },
-                  { path: "/teacher-details", label: "Teacher View" },
+                  { path: "#", label: "Teacher View" },
                   { path: "/add-teachers", label: "Teacher Add" },
-                  { path: "/edit-teacher", label: "Teacher Edit" },
+                  { path: "#", label: "Teacher Edit" },
                 ],
               },
               {
                 title: "Departments",
                 icon: "fas fa-building",
                 submenu: [
-                  { path: "/departments", label: "Department List" },
-                  { path: "/add-department", label: "Department Add" },
-                  { path: "/edit-department", label: "Department Edit" },
+                  { path: "#", label: "Department List" },
+                  { path: "#", label: "Department Add" },
+                  { path: "#", label: "Department Edit" },
                 ],
               },
               {
                 title: "Subjects",
                 icon: "fas fa-book-reader",
                 submenu: [
-                  { path: "/subjects", label: "Subject List" },
-                  { path: "/add-subject", label: "Subject Add" },
-                  { path: "/edit-subject", label: "Subject Edit" },
+                  { path: "#", label: "Subject List" },
+                  { path: "#", label: "Subject Add" },
+                  { path: "#", label: "Subject Edit" },
                 ],
               },
               {
-                title: "Invoices",
+                title: "Contact",
                 icon: "fas fa-check",
                 submenu: [
-                  { path: "/invoices", label: "Invoices List" },
-                  { path: "/add-invoice", label: "Add Invoices" },
+                  { path: "/contact", label: "Contact" },
+                  { path: "#", label: "Add Invoices" },
                 ],
               },
             ].map((menu, index) => (
