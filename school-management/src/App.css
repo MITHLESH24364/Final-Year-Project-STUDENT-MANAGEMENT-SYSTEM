@@ -40,3 +40,25 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Attendancetable css */
+
+.attendance-table {
+  position: relative;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.attendance-table th,
+.attendance-table td {
+  white-space: nowrap;
+  text-align: left;
+}
+
+.fixed-column {
+  position: sticky;
+  left: 0;
+  background-color: #fff;
+  z-index: 1;
+  border-right: 1px solid #ddd;
+}
