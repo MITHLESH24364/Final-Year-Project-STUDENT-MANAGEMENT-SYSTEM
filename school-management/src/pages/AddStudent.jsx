@@ -2,14 +2,32 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 
 const AddStudent = () => {
+  // const [formData, setFormData] = useState({
+  //   firstName: "",
+  //   lastName: "",
+  //   gender: "",
+  //   dob: new Date(),
+  //   studentPhoto: null,
+  // });
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    fullname: "",
     gender: "",
-    dob: new Date(),
-    studentPhoto: null,
+    dateOfBirth: "",
+    rollNo: "",
+    location: "",
+    bloodGroup: "",
+    religion: "",
+    email: "",
+    studentClass: "",
+    section: "",
+    number: "",
+    parentName: "",
+    parentNo: "",
+    image: null,
   });
-
+  
+  const [error, setError] = useState("");
+  
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (files) {
@@ -18,14 +36,48 @@ const AddStudent = () => {
       setFormData({ ...formData, [name]: value });
     }
   };
-
+  
   const handleDateChange = (date) => {
-    setFormData({ ...formData, dob: date });
+    setFormData({ ...formData, dateOfBirth: date });
   };
-
-  const handleSubmit = (e) => {
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
+    const { fullname, gender, dateOfBirth, rollNo, location, bloodGroup, religion, email, studentClass, section, number, parentName, parentNo, image } = formData;
+  
+    const authToken = localStorage.getItem("authToken");
+  
+    if (!authToken) {
+      console.error("Authentication token not found. Please log in.");
+      return;
+    }
+  
+    try {
+      const formDataObject = new FormData();
+      for (const key in formData) {
+        formDataObject.append(key, formData[key]);
+      }
+      console.log("Form Data Object:", formData, JSON.stringify({formDataObject}));
+  
+      const response = await fetch("http://localhost:8080/sms/user/student/add", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Basic ${authToken}`,
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Student added successfully:", data);
+      } else {
+        throw new Error("Error adding student: " + response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setError(error.message);
+    }
   };
 
   return (
