@@ -208,7 +208,6 @@ const StudentDetailsModal = ({ student, isOpen, onClose, onEdit }) => {
               type="button"
               className="btn btn-primary"
               onClick={() => onEdit(currentStudent)}
-              
             >
               <a href="/edit-student">
               Edit
