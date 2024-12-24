@@ -48,7 +48,7 @@ const Sidebar = () => {
                   { path: "/view-students", label: "Student List" },
                   { path: "#", label: "Student View" },
                   { path: "/add-students", label: "Student Add" },
-                  { path: "#", label: "Student Edit" },
+                  { path: "/edit-student", label: "Student Edit" },
                 ],
               },
               {

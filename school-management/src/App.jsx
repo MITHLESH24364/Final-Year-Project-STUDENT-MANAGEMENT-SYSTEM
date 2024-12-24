@@ -18,6 +18,7 @@ import ViewTeachers from './pages/ViewTeachers';
 import PrivateRout from './pages/routes/PrivateRoute';
 import ContactPage from './pages/ContactPage';
 import AttendanceTable from './pages/AttendanceTable';
+import AddEditStudent from './pages/AddEditStudent'
 
 // Protected Route Component
 const PrivateRoute = ({ isAuthenticated, children }) => {
@@ -60,6 +61,7 @@ function App() {
                     <Route path="view-teachers" element={<PrivateRout component= {ViewTeachers} />} />
                     <Route path="contact" element={<PrivateRout component= {ContactPage} />} />
                     <Route path="attendance-table" element={<PrivateRout component= {AttendanceTable} />} />
+                    <Route path="edit-student" element={<PrivateRout component= {AddEditStudent} />} />
 
                 </Route>
             </Routes>

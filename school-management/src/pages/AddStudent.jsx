@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 
 const AddStudent = () => {
-  // const [formData, setFormData] = useState({
-  //   firstName: "",
-  //   lastName: "",
-  //   gender: "",
-  //   dob: new Date(),
-  //   studentPhoto: null,
-  // });
+
   const [formData, setFormData] = useState({
     fullname: "",
     gender: "",

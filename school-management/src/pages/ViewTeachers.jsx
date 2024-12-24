@@ -1,435 +1,19 @@
 // import React, { useState } from "react";
-// import { Tab, Tabs, Table, Card, Button } from "react-bootstrap";
-
-// const ViewTeachers = () => {
-//   const [teachers, setTeachers] = useState([
-//     {
-//       id: 1,
-//       name: "Tiger Nixon",
-//       department: "Architect",
-//       gender: "Male",
-//       education: "M.COM., P.H.D.",
-//       mobile: "123 456 7890",
-//       email: "info@example.com",
-//       joiningDate: "2011/04/25",
-//       profileImage: "images/profile/small/pic1.jpg",
-//     },
-//     {
-//       id: 2,
-//       name: "Garrett Winters",
-//       department: "Accountant",
-//       gender: "Female",
-//       education: "M.COM., P.H.D.",
-//       mobile: "987 654 3210",
-//       email: "info@example.com",
-//       joiningDate: "2011/07/25",
-//       profileImage: "images/profile/small/pic2.jpg",
-//     },
-//     // Add more sample data as needed
-//   ]);
-
-//   return (
-//     <div className="container-fluid">
-//       <div className="row page-titles">
-//         <div className="col-sm-6">
-//           <h4>All Teachers</h4>
-//         </div>
-//         <div className="col-sm-6 text-right">
-//           <Button className="btn btn-primary">+ Add New</Button>
-//         </div>
-//       </div>
-
-//       <Tabs defaultActiveKey="listView" id="teachers-view-tabs">
-//         {/* List View */}
-//         <Tab eventKey="listView" title="List View">
-//           <div className="mt-4">
-//             <Table striped bordered hover>
-//               <thead>
-//                 <tr>
-//                   <th>Image</th>
-//                   <th>Name</th>
-//                   <th>Department</th>
-//                   <th>Gender</th>
-//                   <th>Education</th>
-//                   <th>Mobile</th>
-//                   <th>Email</th>
-//                   <th>Joining Date</th>
-//                   <th>Actions</th>
-//                 </tr>
-//               </thead>
-//               <tbody>
-//                 {teachers.map((teacher) => (
-//                   <tr key={teacher.id}>
-//                     <td>
-//                       <img
-//                         src={teacher.profileImage}
-//                         alt={teacher.name}
-//                         className="rounded-circle"
-//                         width="35"
-//                       />
-//                     </td>
-//                     <td>{teacher.name}</td>
-//                     <td>{teacher.department}</td>
-//                     <td>{teacher.gender}</td>
-//                     <td>{teacher.education}</td>
-//                     <td>{teacher.mobile}</td>
-//                     <td>{teacher.email}</td>
-//                     <td>{teacher.joiningDate}</td>
-//                     <td>
-//                       <Button variant="primary" size="sm">
-//                         Edit
-//                       </Button>
-//                       <Button variant="danger" size="sm" className="ml-2">
-//                         Delete
-//                       </Button>
-//                     </td>
-//                   </tr>
-//                 ))}
-//               </tbody>
-//             </Table>
-//           </div>
-//         </Tab>
-
-//         {/* Grid View */}
-//         <Tab eventKey="gridView" title="Grid View">
-//           <div className="row mt-4">
-//             {teachers.map((teacher) => (
-//               <div className="col-lg-4 col-md-6" key={teacher.id}>
-//                 <Card>
-//                   <Card.Img
-//                     variant="top"
-//                     src={teacher.profileImage}
-//                     className="rounded-circle mx-auto mt-3"
-//                     style={{ width: "100px" }}
-//                   />
-//                   <Card.Body className="text-center">
-//                     <Card.Title>{teacher.name}</Card.Title>
-//                     <Card.Text>{teacher.education}</Card.Text>
-//                     <Card.Text>
-//                       <strong>{teacher.gender}</strong>
-//                     </Card.Text>
-//                     <Card.Text>{teacher.email}</Card.Text>
-//                     <Button variant="outline-primary" size="sm">
-//                       Read More
-//                     </Button>
-//                   </Card.Body>
-//                 </Card>
-//               </div>
-//             ))}
-//           </div>
-//         </Tab>
-//       </Tabs>
-//     </div>
-//   );
-// };
-
-// export default ViewTeachers;
-
-
-
-
-
-
-// import React, { useState } from "react";
 // import GridView from "../components/GridView";
-
-// const ViewTeachers = () => {
-//   const [viewMode, setViewMode] = useState("listView");
-
-//   const teachers = [
-//     {
-//       id: 1,
-//       name: "Tiger Nixon",
-//       department: "Architect",
-//       gender: "Male",
-//       education: "M.COM., P.H.D.",
-//       mobile: "123 456 7890",
-//       email: "info@example.com",
-//       joiningDate: "2011/04/25",
-//       profileImage: "images/profile/small/pic1.jpg",
-//     },
-//     {
-//       id: 2,
-//       name: "Garrett Winters",
-//       department: "Accountant",
-//       gender: "Female",
-//       education: "M.COM., P.H.D.",
-//       mobile: "987 654 3210",
-//       email: "info@example.com",
-//       joiningDate: "2011/07/25",
-//       profileImage: "images/profile/small/pic2.jpg",
-//     },
-//     // Add more sample data as needed
-//   ];
-
-//   return (
-//     <div className="container">
-//       <div className="row">
-//         <div className="col-sm-6">
-//           <h4>All Teachers</h4>
-//         </div>
-//         <div className="col-sm-6 text-right">
-//           <button className="btn btn-primary">+ Add New</button>
-//         </div>
-//       </div>
-
-//       <div className="view-switcher mt-4">
-//         <button
-//           className={`btn ${viewMode === "listView" ? "btn-primary" : "btn-secondary"}`}
-//           onClick={() => setViewMode("listView")}
-//         >
-//           List View
-//         </button>
-//         <button
-//           className={`btn ml-2 ${viewMode === "gridView" ? "btn-primary" : "btn-secondary"}`}
-//           onClick={() => setViewMode("gridView")}
-//         >
-//           Grid View
-//         </button>
-//       </div>
-
-//       <div className="mt-4">
-//         {viewMode === "listView" ? (
-//           <table className="table table-striped table-bordered">
-//             <thead>
-//               <tr>
-//                 <th>Image</th>
-//                 <th>Name</th>
-//                 <th>Department</th>
-//                 <th>Gender</th>
-//                 <th>Education</th>
-//                 <th>Mobile</th>
-//                 <th>Email</th>
-//                 <th>Joining Date</th>
-//                 <th>Actions</th>
-//               </tr>
-//             </thead>
-//             <tbody>
-//               {teachers.map((teacher) => (
-//                 <tr key={teacher.id}>
-//                   <td>
-//                     <img
-//                       src={teacher.profileImage}
-//                       alt={teacher.name}
-//                       className="rounded-circle"
-//                       width="35"
-//                     />
-//                   </td>
-//                   <td>{teacher.name}</td>
-//                   <td>{teacher.department}</td>
-//                   <td>{teacher.gender}</td>
-//                   <td>{teacher.education}</td>
-//                   <td>{teacher.mobile}</td>
-//                   <td>{teacher.email}</td>
-//                   <td>{teacher.joiningDate}</td>
-//                   <td>
-//                     <button className="btn btn-sm btn-primary">Edit</button>
-//                     <button className="btn btn-sm btn-danger ml-2">Delete</button>
-//                   </td>
-//                 </tr>
-//               ))}
-//             </tbody>
-//           </table>
-//         ) : (
-//           <GridView teachers={teachers} />
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ViewTeachers;
-
-
-
-
-
-
-
-// import React, { useState } from "react";
-// import GridView from "../components/GridView";
+// import teachersData from "../data/teachersData";
 
 // const ViewTeachers = () => {
 //   const [viewMode, setViewMode] = useState("listView");
 //   const [currentPage, setCurrentPage] = useState(1);
 //   const [entriesPerPage, setEntriesPerPage] = useState(10);
 
-//   const teachers = [
-//     {
-//       id: 1,
-//       name: "Tiger Nixon",
-//       department: "Architect",
-//       gender: "Male",
-//       education: "M.COM., P.H.D.",
-//       mobile: "123 456 7890",
-//       email: "info@example.com",
-//       joiningDate: "2011/04/25",
-//       profileImage: "images/profile/small/pic1.jpg",
-//     },
-//     {
-//       id: 2,
-//       name: "Garrett Winters",
-//       department: "Accountant",
-//       gender: "Female",
-//       education: "M.COM., P.H.D.",
-//       mobile: "987 654 3210",
-//       email: "info@example.com",
-//       joiningDate: "2011/07/25",
-//       profileImage: "images/profile/small/pic2.jpg",
-//     },
-//     {
-//       id: 3,
-//       name: "Ashton Cox",
-//       department: "Junior Technical Author",
-//       gender: "Male",
-//       education: "M.COM., P.H.D.",
-//       mobile: "321 654 9870",
-//       email: "info@example.com",
-//       joiningDate: "2011/04/25",
-//       profileImage: "images/profile/small/pic3.jpg",
-//     },
-//     {
-//       id: 4,
-//       name: "Cedric Kelly",
-//       department: "Senior Javascript Developer",
-//       gender: "Female",
-//       education: "M.COM., P.H.D.",
-//       mobile: "567 789 3450",
-//       email: "info@example.com",
-//       joiningDate: "2011/07/25",
-//       profileImage: "images/profile/small/pic4.jpg",
-//     },
-//     {
-//       id: 5,
-//       name: "Airi Satou",
-//       department: "Accountant",
-//       gender: "Female",
-//       education: "M.COM., P.H.D.",
-//       mobile: "987 321 6540",
-//       email: "info@example.com",
-//       joiningDate: "2011/07/25",
-//       profileImage: "images/profile/small/pic5.jpg",
-//     },
-//     {
-//       id: 1,
-//       name: "Tiger Nixon",
-//       department: "Architect",
-//       gender: "Male",
-//       education: "M.COM., P.H.D.",
-//       mobile: "123 456 7890",
-//       email: "info@example.com",
-//       joiningDate: "2011/04/25",
-//       profileImage: "images/profile/small/pic1.jpg",
-//     },
-//     {
-//       id: 2,
-//       name: "Garrett Winters",
-//       department: "Accountant",
-//       gender: "Female",
-//       education: "M.COM., P.H.D.",
-//       mobile: "987 654 3210",
-//       email: "info@example.com",
-//       joiningDate: "2011/07/25",
-//       profileImage: "images/profile/small/pic2.jpg",
-//     },
-//     {
-//       id: 3,
-//       name: "Ashton Cox",
-//       department: "Junior Technical Author",
-//       gender: "Male",
-//       education: "M.COM., P.H.D.",
-//       mobile: "321 654 9870",
-//       email: "info@example.com",
-//       joiningDate: "2011/04/25",
-//       profileImage: "images/profile/small/pic3.jpg",
-//     },
-//     {
-//       id: 4,
-//       name: "Cedric Kelly",
-//       department: "Senior Javascript Developer",
-//       gender: "Female",
-//       education: "M.COM., P.H.D.",
-//       mobile: "567 789 3450",
-//       email: "info@example.com",
-//       joiningDate: "2011/07/25",
-//       profileImage: "images/profile/small/pic4.jpg",
-//     },
-//     {
-//       id: 5,
-//       name: "Airi Satou",
-//       department: "Accountant",
-//       gender: "Female",
-//       education: "M.COM., P.H.D.",
-//       mobile: "987 321 6540",
-//       email: "info@example.com",
-//       joiningDate: "2011/07/25",
-//       profileImage: "images/profile/small/pic5.jpg",
-//     },
-//     {
-//       id: 1,
-//       name: "Tiger Nixon",
-//       department: "Architect",
-//       gender: "Male",
-//       education: "M.COM., P.H.D.",
-//       mobile: "123 456 7890",
-//       email: "info@example.com",
-//       joiningDate: "2011/04/25",
-//       profileImage: "images/profile/small/pic1.jpg",
-//     },
-//     {
-//       id: 2,
-//       name: "Garrett Winters",
-//       department: "Accountant",
-//       gender: "Female",
-//       education: "M.COM., P.H.D.",
-//       mobile: "987 654 3210",
-//       email: "info@example.com",
-//       joiningDate: "2011/07/25",
-//       profileImage: "images/profile/small/pic2.jpg",
-//     },
-//     {
-//       id: 3,
-//       name: "Ashton Cox",
-//       department: "Junior Technical Author",
-//       gender: "Male",
-//       education: "M.COM., P.H.D.",
-//       mobile: "321 654 9870",
-//       email: "info@example.com",
-//       joiningDate: "2011/04/25",
-//       profileImage: "images/profile/small/pic3.jpg",
-//     },
-//     {
-//       id: 4,
-//       name: "Cedric Kelly",
-//       department: "Senior Javascript Developer",
-//       gender: "Female",
-//       education: "M.COM., P.H.D.",
-//       mobile: "567 789 3450",
-//       email: "info@example.com",
-//       joiningDate: "2011/07/25",
-//       profileImage: "images/profile/small/pic4.jpg",
-//     },
-//     {
-//       id: 5,
-//       name: "Airi Satou",
-//       department: "Accountant",
-//       gender: "Female",
-//       education: "M.COM., P.H.D.",
-//       mobile: "987 321 6540",
-//       email: "info@example.com",
-//       joiningDate: "2011/07/25",
-//       profileImage: "images/profile/small/pic5.jpg",
-//     },
-//     // Add more teacher data as needed
-//   ];
-
 //   // Calculate the total number of pages
-//   const totalPages = Math.ceil(teachers.length / entriesPerPage);
+//   const totalPages = Math.ceil(teachersData.length / entriesPerPage);
 
 //   // Get the current page's teachers
 //   const indexOfLastEntry = currentPage * entriesPerPage;
 //   const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
-//   const currentTeachers = teachers.slice(indexOfFirstEntry, indexOfLastEntry);
+//   const currentTeachers = teachersData.slice(indexOfFirstEntry, indexOfLastEntry);
 
 //   // Handle entries per page change
 //   const handleEntriesChange = (event) => {
@@ -502,10 +86,9 @@
 //               </tr>
 //             </thead>
 //             <tbody>
-//               {currentTeachers.map((teacher) => (
-//                 <tr key={teacher.id}>
-//                 <td>{teacher.id}</td> 
-
+//               {currentTeachers.map((teacher, index) => (
+//                 <tr key={index}>
+//                   <td>{indexOfFirstEntry + index + 1}</td>
 //                   <td>
 //                     <img
 //                       src={teacher.profileImage}
@@ -522,8 +105,13 @@
 //                   <td>{teacher.email}</td>
 //                   <td>{teacher.joiningDate}</td>
 //                   <td>
-//                     <button className="btn btn-sm btn-primary"><i class="fa fa-pen"></i></button><br />
-//                     <button className="btn btn-sm btn-danger ml-2"><i class="fa fa-trash"></i></button>
+//                     <button className="btn btn-sm btn-primary">
+//                       <i className="fa fa-pen"></i>
+//                     </button>
+//                     <br />
+//                     <button className="btn btn-sm btn-danger ml-2">
+//                       <i className="fa fa-trash"></i>
+//                     </button>
 //                   </td>
 //                 </tr>
 //               ))}
@@ -534,46 +122,43 @@
 //         )}
 //       </div>
 
-//      {/* Pagination */}
-// <div className="pagination mt-4">
-//   <div className="fit">
-//     <div>
-//     <span>
-//       Showing {indexOfFirstEntry + 1} to {indexOfLastEntry} of {teachers.length} entries
-//     </span>
-//     </div>
+//       {/* Pagination */}
+//       <div className="pagination mt-4">
+//         <div className="fit">
+//           <div>
+//             <span>
+//               Showing {indexOfFirstEntry + 1} to {Math.min(indexOfLastEntry, teachersData.length)} of {teachersData.length} entries
+//             </span>
+//           </div>
 
-//     {/* Pagination Controls */}
-//     <div className="ml-auto d-flex">
-//       <button
-//         className="btn btn-secondary"
-//         onClick={() => setCurrentPage(currentPage - 1)}
-//         disabled={currentPage === 1}
-//       >
-//         Previous
-//       </button>
-
-//       {/* Page Number Buttons */}
-//       {[...Array(totalPages).keys()].map((num) => (
-//         <button
-//           key={num}
-//           className={`btn ${currentPage === num + 1 ? "btn-primary" : "btn-secondary"} ml-1`}
-//           onClick={() => handlePageChange(num + 1)}
-//         >
-//           {num + 1}
-//         </button>
-//       ))}
-
-//       <button
-//         className="btn btn-secondary ml-2"
-//         onClick={() => setCurrentPage(currentPage + 1)}
-//         disabled={currentPage === totalPages}
-//       >
-//         Next
-//       </button>
-//     </div>
-//   </div>
-// </div>
+//           {/* Pagination Controls */}
+//           <div className="ml-auto d-flex">
+//             <button
+//               className="btn btn-secondary"
+//               onClick={() => setCurrentPage(currentPage - 1)}
+//               disabled={currentPage === 1}
+//             >
+//               Previous
+//             </button>
+//             {[...Array(totalPages).keys()].map((num) => (
+//               <button
+//                 key={num}
+//                 className={`btn ${currentPage === num + 1 ? "btn-primary" : "btn-secondary"} ml-1`}
+//                 onClick={() => handlePageChange(num + 1)}
+//               >
+//                 {num + 1}
+//               </button>
+//             ))}
+//             <button
+//               className="btn btn-secondary ml-2"
+//               onClick={() => setCurrentPage(currentPage + 1)}
+//               disabled={currentPage === totalPages}
+//             >
+//               Next
+//             </button>
+//           </div>
+//         </div>
+//       </div>
 //     </div>
 //   );
 // };
@@ -583,35 +168,266 @@
 
 
 
+// import React, { useState, useEffect } from "react";
+
+// const ViewTeachers = () => {
+//   const [filters, setFilters] = useState({
+//     subject: "",
+//     orderBy: "id", // Default sort by ID
+//     name: "" // Name filter
+//   });
+
+//   const [teachers, setTeachers] = useState([]);
+//   const [filteredTeachers, setFilteredTeachers] = useState([]);
+
+//   // Fetch teachers data from the backend
+//   const fetchTeachers = async () => {
+//     const authToken = localStorage.getItem("authToken");
+
+//     if (!authToken) {
+//       console.error("Authentication token not found. Please log in.");
+//       return;
+//     }
+
+//     try {
+//       const response = await fetch("http://localhost:8080/sms/user/staff/all", {
+//         headers: {
+//           Authorization: `Basic ${authToken}`,
+//         },
+//       });
+
+//       if (response.ok) {
+//         const data = await response.json();
+//         console.log("Fetched teachers:", data); // Debugging
+//         setTeachers(data);
+//         setFilteredTeachers(data); // Display all data by default
+//       } else {
+//         throw new Error("Error fetching teachers: " + response.statusText);
+//       }
+//     } catch (error) {
+//       console.error("Error:", error);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchTeachers();
+//   }, []);
+
+//   const handleFilterChange = (e) => {
+//     const { name, value } = e.target;
+//     setFilters({ ...filters, [name]: value });
+//   };
+
+//   const handleApplyFilter = () => {
+//     let filtered = [...teachers];
+
+//     // Apply filters only if criteria are specified
+//     if (filters.name) {
+//       filtered = filtered.filter(teacher =>
+//         teacher.fullname.toLowerCase().includes(filters.name.toLowerCase())
+//       );
+//     }
+
+//     if (filters.subject) {
+//       filtered = filtered.filter(teacher => teacher.subject === filters.subject);
+//     }
+
+//     // Sort by selected order (ID or Name)
+//     if (filters.orderBy === "id") {
+//       filtered.sort((a, b) => a.accountId - b.accountId);
+//     } else if (filters.orderBy === "name") {
+//       filtered.sort((a, b) => a.fullname.localeCompare(b.fullname));
+//     }
+
+//     setFilteredTeachers(filtered);
+//   };
+
+//   return (
+//     <div className="main-wrapper">
+//       <div className="page-wrapper">
+//         <div className="content container-fluid">
+//           {/* Page Header */}
+//           <div className="page-header">
+//             <div className="row">
+//               <div className="col-sm-12">
+//                 <div className="page-sub-header">
+//                   <h3 className="page-title">View Teachers</h3>
+//                   <ul className="breadcrumb">
+//                     <li className="breadcrumb-item">
+//                       <a href="/teachers">Teachers</a>
+//                     </li>
+//                     <li className="breadcrumb-item active">View Teachers</li>
+//                   </ul>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* Filter Section */}
+//           <form>
+//             <div className="row mb-4">
+//               <div className="col-md-3">
+//                 <label htmlFor="subjectFilter">Subject</label>
+//                 <select
+//                   className="form-control"
+//                   name="subject"
+//                   id="subjectFilter"
+//                   value={filters.subject}
+//                   onChange={handleFilterChange}
+//                 >
+//                   <option value="">Select Subject</option>
+//                   <option value="Math">Math</option>
+//                   <option value="Science">Science</option>
+//                   <option value="English">English</option>
+//                   <option value="Social">Social</option>
+//                   <option value="Computer">Computer</option>
+//                 </select>
+//               </div>
+
+//               <div className="col-md-3">
+//                 <label htmlFor="nameFilter">Name</label>
+//                 <input
+//                   type="text"
+//                   className="form-control"
+//                   name="name"
+//                   id="nameFilter"
+//                   value={filters.name}
+//                   onChange={handleFilterChange}
+//                   placeholder="Enter Name (Optional)"
+//                 />
+//               </div>
+
+//               <div className="col-md-3">
+//                 <label htmlFor="orderByFilter">Order By</label>
+//                 <select
+//                   className="form-control"
+//                   name="orderBy"
+//                   id="orderByFilter"
+//                   value={filters.orderBy}
+//                   onChange={handleFilterChange}
+//                 >
+//                   <option value="id">ID</option>
+//                   <option value="name">Name</option>
+//                 </select>
+//               </div>
+
+//               <div className="col-md-3 mt-4">
+//                 <button
+//                   type="button"
+//                   className="btn btn-primary"
+//                   onClick={handleApplyFilter}
+//                 >
+//                   Apply Filter
+//                 </button>
+//               </div>
+//             </div>
+//           </form>
+
+//           {filteredTeachers.length > 0 ? (
+//             <div className="row">
+//               <div className="col-md-12">
+//                 <div className="card">
+//                   <div className="card-body">
+//                     <h5 className="card-title">Teachers List</h5>
+//                     <table className="table table-bordered">
+//                       <thead>
+//                         <tr>
+//                           <th>ID</th>
+//                           <th>Name</th>
+//                           <th>Department</th>
+//                           <th>Action</th>
+//                         </tr>
+//                       </thead>
+//                       <tbody>
+//                         {filteredTeachers.map((teacher) => (
+//                           <tr key={teacher.accountId}>
+//                             <td>{teacher.id}</td>
+//                             <td>{teacher.fullname}</td>
+//                             <td>{teacher.department}</td>
+//                             <td>
+//                               <button
+//                                 className="btn btn-primary btn-sm"
+//                                 onClick={() => console.log("View details for", teacher)}
+//                               >
+//                                 Detail
+//                               </button>
+//                             </td>
+//                           </tr>
+//                         ))}
+//                       </tbody>
+//                     </table>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           ) : (
+//             <p className="text-center">No teachers found. Please adjust the filter criteria.</p>
+//           )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default ViewTeachers;
 
 
 
-
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GridView from "../components/GridView";
-import teachersData from "../data/teachersData";
 
 const ViewTeachers = () => {
   const [viewMode, setViewMode] = useState("listView");
   const [currentPage, setCurrentPage] = useState(1);
   const [entriesPerPage, setEntriesPerPage] = useState(10);
+  const [teachers, setTeachers] = useState([]);
+  const [filteredTeachers, setFilteredTeachers] = useState([]);
 
-  // Calculate the total number of pages
-  const totalPages = Math.ceil(teachersData.length / entriesPerPage);
+  // Fetch teachers data from the backend
+  const fetchTeachers = async () => {
+    const authToken = localStorage.getItem("authToken");
 
-  // Get the current page's teachers
+    if (!authToken) {
+      console.error("Authentication token not found. Please log in.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:8080/sms/user/staff/all", {
+        headers: {
+          Authorization: `Basic ${authToken}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Fetched teachers:", data); // Debugging
+        setTeachers(data);
+        setFilteredTeachers(data); // Display all data by default
+      } else {
+        throw new Error("Error fetching teachers: " + response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTeachers();
+  }, []);
+
+  // Pagination Logic
   const indexOfLastEntry = currentPage * entriesPerPage;
   const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
-  const currentTeachers = teachersData.slice(indexOfFirstEntry, indexOfLastEntry);
+  const currentTeachers = filteredTeachers.slice(indexOfFirstEntry, indexOfLastEntry);
 
-  // Handle entries per page change
+  const totalPages = Math.ceil(filteredTeachers.length / entriesPerPage);
+
   const handleEntriesChange = (event) => {
     setEntriesPerPage(parseInt(event.target.value));
     setCurrentPage(1); // Reset to first page when entries per page change
   };
 
-  // Handle page change
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -643,11 +459,7 @@ const ViewTeachers = () => {
       {/* Filter by entries */}
       <div className="mt-3">
         <label>Show</label>
-        <select
-          className="ml-2"
-          value={entriesPerPage}
-          onChange={handleEntriesChange}
-        >
+        <select className="ml-2" value={entriesPerPage} onChange={handleEntriesChange}>
           <option value={10}>10</option>
           <option value={20}>20</option>
           <option value={30}>30</option>
@@ -668,32 +480,28 @@ const ViewTeachers = () => {
                 <th>Name</th>
                 <th>Department</th>
                 <th>Gender</th>
-                <th>Education</th>
                 <th>Mobile</th>
                 <th>Email</th>
-                <th>Joining Date</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {currentTeachers.map((teacher, index) => (
-                <tr key={index}>
+                <tr key={teacher.accountId}>
                   <td>{indexOfFirstEntry + index + 1}</td>
                   <td>
                     <img
-                      src={teacher.profileImage}
-                      alt={teacher.name}
+                      src={teacher.image || "mks.jpg"} // Fallback for missing images
+                      alt={teacher.fullname}
                       className="rounded-circle"
                       width="35"
                     />
                   </td>
-                  <td>{teacher.name}</td>
-                  <td>{teacher.department}</td>
-                  <td>{teacher.gender}</td>
-                  <td>{teacher.education}</td>
-                  <td>{teacher.mobile}</td>
+                  <td>{teacher.fullname}</td>
+                  <td>{teacher.department || "N/A"}</td>
+                  <td>{teacher.gender || "N/A"}</td>
+                  <td>{teacher.phoneNumber}</td>
                   <td>{teacher.email}</td>
-                  <td>{teacher.joiningDate}</td>
                   <td>
                     <button className="btn btn-sm btn-primary">
                       <i className="fa fa-pen"></i>
@@ -717,7 +525,7 @@ const ViewTeachers = () => {
         <div className="fit">
           <div>
             <span>
-              Showing {indexOfFirstEntry + 1} to {Math.min(indexOfLastEntry, teachersData.length)} of {teachersData.length} entries
+              Showing {indexOfFirstEntry + 1} to {Math.min(indexOfLastEntry, filteredTeachers.length)} of {filteredTeachers.length} entries
             </span>
           </div>
 

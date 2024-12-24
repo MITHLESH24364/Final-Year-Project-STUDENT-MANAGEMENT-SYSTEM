@@ -474,6 +474,7 @@ const Login = ({ setIsAuthenticated }) => {
       // Store token or credentials in localStorage
       localStorage.setItem("authToken", basicAuthToken);
       localStorage.setItem("isLogin", 1);
+      localStorage.setItem("fullname", data.staff.fullname); // Save fullname
       // Update authentication state and navigate
       setIsAuthenticated(true); // Notify parent about authentication status
       navigate("/"); // Redirect to Admin Dashboard or any specific route
