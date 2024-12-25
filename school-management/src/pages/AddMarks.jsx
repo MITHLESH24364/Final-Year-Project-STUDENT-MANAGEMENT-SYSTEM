@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import studentData from "../Data/studentData"; // Import the student data file
+import React, { useState, useEffect } from "react";
 
 const AddMarks = () => {
   // States for form controls
@@ -8,63 +7,103 @@ const AddMarks = () => {
   const [section, setSection] = useState("");
   const [year, setYear] = useState("");
   const [subject, setSubject] = useState("");
+  const [sortBy, setSortBy] = useState("");
 
   // State to store marks input values and errors
   const [marks, setMarks] = useState({});
   const [errors, setErrors] = useState({});
+  const [students, setStudents] = useState([]);
 
-  // Determine max marks based on exam term
+  // Fetch students data from backend
+  const fetchStudents = async () => {
+    const authToken = localStorage.getItem("authToken");
+
+    if (!authToken) {
+      console.error("Authentication token not found. Please log in.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:8080/sms/user/student/all", {
+        headers: {
+          Authorization: `Basic ${authToken}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setStudents(data);
+      } else {
+        throw new Error("Error fetching students: " + response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchStudents();
+  }, []);
+
   const getMaxMarks = () => {
     if (exam.includes("pr")) return 25; // Practical exam
     return 75; // Theory exam
   };
 
   // Filter students based on class and section
-  const filteredStudents = studentData.filter(
-    (student) =>
-      (student.class === classLevel && student.section === section) ||
-      !classLevel ||
-      !section
-  );
-
-  
-
+  const filteredStudents = students
+    .filter(
+      (student) =>
+        (student.studentClass === classLevel && student.section === section) ||
+        !classLevel ||
+        !section
+    )
+    .sort((a, b) => {
+      switch (sortBy) {
+        case "id":
+          return a.accountId - b.accountId;
+        case "name":
+          return a.fullname.localeCompare(b.fullname);
+        case "roll":
+          return a.rollNo - b.rollNo;
+        default:
+          return a.accountId - b.accountId; // Default sorting by ID
+      }
+    });
 
   // Handle marks input change
-const handleMarksChange = (id, value) => {
-  const maxMarks = getMaxMarks();
-  const numericValue = Number(value);
+  const handleMarksChange = (id, value) => {
+    const maxMarks = getMaxMarks();
+    const numericValue = Number(value);
 
-  // Check if the value is less than 0 or greater than the maxMarks
-  if (numericValue < 0) {
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [id]: `Marks cannot be less than 0`,
+    // Check if the value is less than 0 or greater than the maxMarks
+    if (numericValue < 0) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [id]: `Marks cannot be less than 0`,
+      }));
+      return;
+    } else if (numericValue > maxMarks) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [id]: `Marks cannot exceed ${maxMarks}`,
+      }));
+      return;
+    } else {
+      // Remove error if the value is valid
+      setErrors((prevErrors) => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors[id];
+        return updatedErrors;
+      });
+    }
+
+    // Update marks
+    setMarks((prevMarks) => ({
+      ...prevMarks,
+      [id]: value,
     }));
-    return;
-  } else if (numericValue > maxMarks) {
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [id]: `Marks cannot exceed ${maxMarks}`,
-    }));
-    return;
-  } else {
-    // Remove error if the value is valid
-    setErrors((prevErrors) => {
-      const updatedErrors = { ...prevErrors };
-      delete updatedErrors[id];
-      return updatedErrors;
-    });
-  }
-
-  // Update marks
-  setMarks((prevMarks) => ({
-    ...prevMarks,
-    [id]: value,
-  }));
-};
-
-
+  };
 
   // Handle form submission
   const handleSubmit = (e) => {
@@ -220,6 +259,23 @@ const handleMarksChange = (id, value) => {
                   ))}
                 </select>
               </div>
+
+              <div className="col-md-2">
+                <label htmlFor="sortSelect" className="form-label">
+                  Sort By
+                </label>
+                <select
+                  className="form-control"
+                  id="sortSelect"
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                >
+                  <option value="">Select Sorting Option</option>
+                  <option value="id">ID</option>
+                  <option value="name">Name</option>
+                  <option value="rollNumber">Roll Number</option>
+                </select>
+              </div>
             </div>
 
             {/* Render the table only if all filters are selected */}
@@ -230,30 +286,28 @@ const handleMarksChange = (id, value) => {
                     <tr>
                       <th>Name</th>
                       <th>Student ID</th>
+                      <th>Roll Number</th>
                       <th>Marks (Max {getMaxMarks()})</th>
                     </tr>
                   </thead>
                   <tbody>
                     {filteredStudents.map((student) => (
-                      <tr key={student.id}>
-                        <td>{student.name}</td>
-                        <td>{student.id}</td>
+                      <tr key={student.accountId}>
+                        <td>{student.fullname}</td>
+                        <td>{student.accountId}</td>
+                        <td>{student.rollNo}</td>
                         <td>
-                        
-
                           <input
                             type="number"
                             className="form-control"
-                            value={marks[student.id] || ""}
-                            onChange={(e) => handleMarksChange(student.id, e.target.value)}
+                            value={marks[student.accountId] || ""}
+                            onChange={(e) => handleMarksChange(student.accountId, e.target.value)}
                             min={0} // Prevent entering marks less than 0
                             max={getMaxMarks()} // Restrict input directly in the field
                           />
-
-
-                          {errors[student.id] && (
+                          {errors[student.accountId] && (
                             <small className="text-danger">
-                              {errors[student.id]}
+                              {errors[student.accountId]}
                             </small>
                           )}
                         </td>

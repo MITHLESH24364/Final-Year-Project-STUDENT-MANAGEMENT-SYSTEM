@@ -62,3 +62,39 @@
   z-index: 1;
   border-right: 1px solid #ddd;
 }
+
+
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh; /* Full height */
+  width: 20%; /* Adjust based on your design */
+  z-index: 999; /* Ensure sidebar stays above main content */
+}
+
+.sidebar.mini-sidebar {
+  width: 20%;
+}
+
+.header {
+  z-index: 1000; /* Ensure header stays above sidebar */
+}
+
+.sidebar-inner {
+  overflow-y: auto;
+}
+
+.sidebar-menu .submenu {
+  list-style-type: none;
+}
+
+.sidebar-menu .submenu.active > ul {
+  display: block;
+}
+
+.menu-item.active {
+  background-color: #f0f0f0;
+  color: #000;
+}

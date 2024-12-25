@@ -271,33 +271,7 @@ const AbsentStudents = () => {
             </div>
           </div>
 
-          {/* Navigation Tabs */}
-          {/* <div className="d-flex justify-content-between align-items-center mb-4">
-            <ul className="nav nav-tabs">
-              {[
-                "Add/Edit",
-                "Recent",
-                "Absentee",
-                "Absentee Range",
-                "Attendance Record",
-                "Download",
-                "Daily(Student)",
-                "Monthly",
-                "Attendance Chart",
-              ].map((tab, index) => (
-                <li className="nav-item" key={index}>
-                  <a
-                    className={`nav-link ${activeTab === tab ? "active" : ""}`}
-                    href="#"
-                    onClick={() => handleTabClick(tab)}
-                  >
-                    {tab}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div> */}
-
+         
           {/* Filter Section */}
           <div className="filter-section mb-4">
             <div className="row">

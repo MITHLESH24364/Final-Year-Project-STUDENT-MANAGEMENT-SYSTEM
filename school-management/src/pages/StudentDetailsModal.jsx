@@ -1,5 +1,4 @@
 // const StudentDetailsModal = ({ student, isOpen, onClose, onEdit }) => {
-//   console.log(student);
 //   if (!isOpen || !student) return null;
 
 //   const defaultStudent = {
@@ -63,26 +62,24 @@
 //                 borderRadius: "50%",
 //               }}
 //             />
-       
-
-// <p>
-//                <strong>ID:</strong> {student.accountId}
-//              </p>
-//              <p>
-//                <strong>Name:</strong> {student.fullname}
-//              </p>
-//              <p>
-//                <strong>Class:</strong> {student.studentClass}
-//              </p>
-//              <p>
-//                <strong>Section:</strong> {student.section}
-//              </p>
-//              <p>
-//                <strong>Father's Phone:</strong> {student.number}
-//              </p>
-//              <p>
-//                <strong>Mother's Phone:</strong> {student.parentNo}
-//              </p>
+//             <p>
+//               <strong>ID:</strong> {currentStudent.accountId}
+//             </p>
+//             <p>
+//               <strong>Name:</strong> {currentStudent.fullname}
+//             </p>
+//             <p>
+//               <strong>Class:</strong> {currentStudent.studentClass}
+//             </p>
+//             <p>
+//               <strong>Section:</strong> {currentStudent.section || "N/A"}
+//             </p>
+//             <p>
+//               <strong>Father's Phone:</strong> {currentStudent.parentNo}
+//             </p>
+//             <p>
+//               <strong>Mother's Phone:</strong> {currentStudent.motherPhone}
+//             </p>
 //           </div>
 //           <div className="modal-footer">
 //             <button
@@ -97,7 +94,9 @@
 //               className="btn btn-primary"
 //               onClick={() => onEdit(currentStudent)}
 //             >
+//               <a href={`edit-student/${currentStudent.accountId}`}>
 //               Edit
+//               </a>
 //             </button>
 //           </div>
 //         </div>
@@ -107,8 +106,6 @@
 // };
 
 // export default StudentDetailsModal;
-
-
 
 
 
@@ -208,9 +205,18 @@ const StudentDetailsModal = ({ student, isOpen, onClose, onEdit }) => {
               type="button"
               className="btn btn-primary"
               onClick={() => onEdit(currentStudent)}
+              style={{
+                backgroundColor: "#007bff",
+                color: "white",
+                border: "none",
+                padding: "10px 20px",
+                borderRadius: "5px",
+                cursor: "pointer",
+                fontWeight: "bold",
+              }}
             >
-              <a href="/edit-student">
-              Edit
+              <a href={`edit-student/${currentStudent.accountId}`} style={{ color: "white", textDecoration: "none" }}>
+                Edit
               </a>
             </button>
           </div>

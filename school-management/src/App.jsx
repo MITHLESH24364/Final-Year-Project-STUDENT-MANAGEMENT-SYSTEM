@@ -61,7 +61,9 @@ function App() {
                     <Route path="view-teachers" element={<PrivateRout component= {ViewTeachers} />} />
                     <Route path="contact" element={<PrivateRout component= {ContactPage} />} />
                     <Route path="attendance-table" element={<PrivateRout component= {AttendanceTable} />} />
+                    <Route path="edit-student/:id" element={<PrivateRout component= {AddEditStudent} />} />
                     <Route path="edit-student" element={<PrivateRout component= {AddEditStudent} />} />
+
 
                 </Route>
             </Routes>
