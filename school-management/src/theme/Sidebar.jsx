@@ -224,7 +224,7 @@ const Sidebar = () => {
                   { path: "/view-teachers", label: "Teacher List" },
                   { path: "#", label: "Teacher View" },
                   { path: "/add-teachers", label: "Teacher Add" },
-                  { path: "#", label: "Teacher Edit" },
+                  { path: "/edit-teacher", label: "Teacher Edit" },
                 ],
               },
               {

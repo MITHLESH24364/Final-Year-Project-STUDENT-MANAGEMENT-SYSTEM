@@ -114,8 +114,9 @@ const AddEditStudent = () => {
         method,
         body: formDataObject,
         headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
+          "Content-Type": "application/json",
+       Authorization: `Basic ${authToken}`,
+         },
       });
 
       if (response.ok) {
@@ -301,3 +302,4 @@ const AddEditStudent = () => {
 };
 
 export default AddEditStudent;
+

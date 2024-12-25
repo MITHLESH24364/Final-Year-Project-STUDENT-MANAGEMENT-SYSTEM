@@ -1,27 +1,58 @@
-// import React, { useState } from "react";
+// import React, { useState, useEffect } from "react";
 // import GridView from "../components/GridView";
-// import teachersData from "../data/teachersData";
 
 // const ViewTeachers = () => {
 //   const [viewMode, setViewMode] = useState("listView");
 //   const [currentPage, setCurrentPage] = useState(1);
 //   const [entriesPerPage, setEntriesPerPage] = useState(10);
+//   const [teachers, setTeachers] = useState([]);
+//   const [filteredTeachers, setFilteredTeachers] = useState([]);
 
-//   // Calculate the total number of pages
-//   const totalPages = Math.ceil(teachersData.length / entriesPerPage);
+//   // Fetch teachers data from the backend
+//   const fetchTeachers = async () => {
+//     const authToken = localStorage.getItem("authToken");
 
-//   // Get the current page's teachers
+//     if (!authToken) {
+//       console.error("Authentication token not found. Please log in.");
+//       return;
+//     }
+
+//     try {
+//       const response = await fetch("http://localhost:8080/sms/user/staff/all", {
+//         headers: {
+//           Authorization: `Basic ${authToken}`,
+//         },
+//       });
+
+//       if (response.ok) {
+//         const data = await response.json();
+//         console.log("Fetched teachers:", data); // Debugging
+//         setTeachers(data);
+//         setFilteredTeachers(data); // Display all data by default
+//       } else {
+//         throw new Error("Error fetching teachers: " + response.statusText);
+//       }
+//     } catch (error) {
+//       console.error("Error:", error);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchTeachers();
+//   }, []);
+
+//   // Pagination Logic
 //   const indexOfLastEntry = currentPage * entriesPerPage;
 //   const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
-//   const currentTeachers = teachersData.slice(indexOfFirstEntry, indexOfLastEntry);
+//   const currentTeachers = filteredTeachers.slice(indexOfFirstEntry, indexOfLastEntry);
 
-//   // Handle entries per page change
+//   const totalPages = Math.ceil(filteredTeachers.length / entriesPerPage);
+
 //   const handleEntriesChange = (event) => {
 //     setEntriesPerPage(parseInt(event.target.value));
 //     setCurrentPage(1); // Reset to first page when entries per page change
 //   };
 
-//   // Handle page change
 //   const handlePageChange = (pageNumber) => {
 //     setCurrentPage(pageNumber);
 //   };
@@ -53,11 +84,7 @@
 //       {/* Filter by entries */}
 //       <div className="mt-3">
 //         <label>Show</label>
-//         <select
-//           className="ml-2"
-//           value={entriesPerPage}
-//           onChange={handleEntriesChange}
-//         >
+//         <select className="ml-2" value={entriesPerPage} onChange={handleEntriesChange}>
 //           <option value={10}>10</option>
 //           <option value={20}>20</option>
 //           <option value={30}>30</option>
@@ -78,34 +105,31 @@
 //                 <th>Name</th>
 //                 <th>Department</th>
 //                 <th>Gender</th>
-//                 <th>Education</th>
 //                 <th>Mobile</th>
 //                 <th>Email</th>
-//                 <th>Joining Date</th>
 //                 <th>Actions</th>
 //               </tr>
 //             </thead>
 //             <tbody>
 //               {currentTeachers.map((teacher, index) => (
-//                 <tr key={index}>
+//                 <tr key={teacher.accountId}>
 //                   <td>{indexOfFirstEntry + index + 1}</td>
 //                   <td>
 //                     <img
-//                       src={teacher.profileImage}
-//                       alt={teacher.name}
+//                       src={teacher.image || "mks.jpg"} // Fallback for missing images
+//                       alt={teacher.fullname}
 //                       className="rounded-circle"
 //                       width="35"
 //                     />
 //                   </td>
-//                   <td>{teacher.name}</td>
-//                   <td>{teacher.department}</td>
-//                   <td>{teacher.gender}</td>
-//                   <td>{teacher.education}</td>
-//                   <td>{teacher.mobile}</td>
+//                   <td>{teacher.fullname}</td>
+//                   <td>{teacher.department || "N/A"}</td>
+//                   <td>{teacher.gender || "N/A"}</td>
+//                   <td>{teacher.phoneNumber}</td>
 //                   <td>{teacher.email}</td>
-//                   <td>{teacher.joiningDate}</td>
 //                   <td>
 //                     <button className="btn btn-sm btn-primary">
+                      
 //                       <i className="fa fa-pen"></i>
 //                     </button>
 //                     <br />
@@ -127,7 +151,7 @@
 //         <div className="fit">
 //           <div>
 //             <span>
-//               Showing {indexOfFirstEntry + 1} to {Math.min(indexOfLastEntry, teachersData.length)} of {teachersData.length} entries
+//               Showing {indexOfFirstEntry + 1} to {Math.min(indexOfLastEntry, filteredTeachers.length)} of {filteredTeachers.length} entries
 //             </span>
 //           </div>
 
@@ -168,213 +192,10 @@
 
 
 
-// import React, { useState, useEffect } from "react";
-
-// const ViewTeachers = () => {
-//   const [filters, setFilters] = useState({
-//     subject: "",
-//     orderBy: "id", // Default sort by ID
-//     name: "" // Name filter
-//   });
-
-//   const [teachers, setTeachers] = useState([]);
-//   const [filteredTeachers, setFilteredTeachers] = useState([]);
-
-//   // Fetch teachers data from the backend
-//   const fetchTeachers = async () => {
-//     const authToken = localStorage.getItem("authToken");
-
-//     if (!authToken) {
-//       console.error("Authentication token not found. Please log in.");
-//       return;
-//     }
-
-//     try {
-//       const response = await fetch("http://localhost:8080/sms/user/staff/all", {
-//         headers: {
-//           Authorization: `Basic ${authToken}`,
-//         },
-//       });
-
-//       if (response.ok) {
-//         const data = await response.json();
-//         console.log("Fetched teachers:", data); // Debugging
-//         setTeachers(data);
-//         setFilteredTeachers(data); // Display all data by default
-//       } else {
-//         throw new Error("Error fetching teachers: " + response.statusText);
-//       }
-//     } catch (error) {
-//       console.error("Error:", error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchTeachers();
-//   }, []);
-
-//   const handleFilterChange = (e) => {
-//     const { name, value } = e.target;
-//     setFilters({ ...filters, [name]: value });
-//   };
-
-//   const handleApplyFilter = () => {
-//     let filtered = [...teachers];
-
-//     // Apply filters only if criteria are specified
-//     if (filters.name) {
-//       filtered = filtered.filter(teacher =>
-//         teacher.fullname.toLowerCase().includes(filters.name.toLowerCase())
-//       );
-//     }
-
-//     if (filters.subject) {
-//       filtered = filtered.filter(teacher => teacher.subject === filters.subject);
-//     }
-
-//     // Sort by selected order (ID or Name)
-//     if (filters.orderBy === "id") {
-//       filtered.sort((a, b) => a.accountId - b.accountId);
-//     } else if (filters.orderBy === "name") {
-//       filtered.sort((a, b) => a.fullname.localeCompare(b.fullname));
-//     }
-
-//     setFilteredTeachers(filtered);
-//   };
-
-//   return (
-//     <div className="main-wrapper">
-//       <div className="page-wrapper">
-//         <div className="content container-fluid">
-//           {/* Page Header */}
-//           <div className="page-header">
-//             <div className="row">
-//               <div className="col-sm-12">
-//                 <div className="page-sub-header">
-//                   <h3 className="page-title">View Teachers</h3>
-//                   <ul className="breadcrumb">
-//                     <li className="breadcrumb-item">
-//                       <a href="/teachers">Teachers</a>
-//                     </li>
-//                     <li className="breadcrumb-item active">View Teachers</li>
-//                   </ul>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-
-//           {/* Filter Section */}
-//           <form>
-//             <div className="row mb-4">
-//               <div className="col-md-3">
-//                 <label htmlFor="subjectFilter">Subject</label>
-//                 <select
-//                   className="form-control"
-//                   name="subject"
-//                   id="subjectFilter"
-//                   value={filters.subject}
-//                   onChange={handleFilterChange}
-//                 >
-//                   <option value="">Select Subject</option>
-//                   <option value="Math">Math</option>
-//                   <option value="Science">Science</option>
-//                   <option value="English">English</option>
-//                   <option value="Social">Social</option>
-//                   <option value="Computer">Computer</option>
-//                 </select>
-//               </div>
-
-//               <div className="col-md-3">
-//                 <label htmlFor="nameFilter">Name</label>
-//                 <input
-//                   type="text"
-//                   className="form-control"
-//                   name="name"
-//                   id="nameFilter"
-//                   value={filters.name}
-//                   onChange={handleFilterChange}
-//                   placeholder="Enter Name (Optional)"
-//                 />
-//               </div>
-
-//               <div className="col-md-3">
-//                 <label htmlFor="orderByFilter">Order By</label>
-//                 <select
-//                   className="form-control"
-//                   name="orderBy"
-//                   id="orderByFilter"
-//                   value={filters.orderBy}
-//                   onChange={handleFilterChange}
-//                 >
-//                   <option value="id">ID</option>
-//                   <option value="name">Name</option>
-//                 </select>
-//               </div>
-
-//               <div className="col-md-3 mt-4">
-//                 <button
-//                   type="button"
-//                   className="btn btn-primary"
-//                   onClick={handleApplyFilter}
-//                 >
-//                   Apply Filter
-//                 </button>
-//               </div>
-//             </div>
-//           </form>
-
-//           {filteredTeachers.length > 0 ? (
-//             <div className="row">
-//               <div className="col-md-12">
-//                 <div className="card">
-//                   <div className="card-body">
-//                     <h5 className="card-title">Teachers List</h5>
-//                     <table className="table table-bordered">
-//                       <thead>
-//                         <tr>
-//                           <th>ID</th>
-//                           <th>Name</th>
-//                           <th>Department</th>
-//                           <th>Action</th>
-//                         </tr>
-//                       </thead>
-//                       <tbody>
-//                         {filteredTeachers.map((teacher) => (
-//                           <tr key={teacher.accountId}>
-//                             <td>{teacher.id}</td>
-//                             <td>{teacher.fullname}</td>
-//                             <td>{teacher.department}</td>
-//                             <td>
-//                               <button
-//                                 className="btn btn-primary btn-sm"
-//                                 onClick={() => console.log("View details for", teacher)}
-//                               >
-//                                 Detail
-//                               </button>
-//                             </td>
-//                           </tr>
-//                         ))}
-//                       </tbody>
-//                     </table>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           ) : (
-//             <p className="text-center">No teachers found. Please adjust the filter criteria.</p>
-//           )}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ViewTeachers;
-
-
 
 import React, { useState, useEffect } from "react";
 import GridView from "../components/GridView";
+import { useNavigate } from "react-router-dom";
 
 const ViewTeachers = () => {
   const [viewMode, setViewMode] = useState("listView");
@@ -382,6 +203,8 @@ const ViewTeachers = () => {
   const [entriesPerPage, setEntriesPerPage] = useState(10);
   const [teachers, setTeachers] = useState([]);
   const [filteredTeachers, setFilteredTeachers] = useState([]);
+
+  const navigate = useNavigate();
 
   // Fetch teachers data from the backend
   const fetchTeachers = async () => {
@@ -401,7 +224,6 @@ const ViewTeachers = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Fetched teachers:", data); // Debugging
         setTeachers(data);
         setFilteredTeachers(data); // Display all data by default
       } else {
@@ -430,6 +252,10 @@ const ViewTeachers = () => {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  const handleEdit = (teacherId) => {
+    navigate(`/edit-teacher/${teacherId}`);
   };
 
   return (
@@ -503,7 +329,10 @@ const ViewTeachers = () => {
                   <td>{teacher.phoneNumber}</td>
                   <td>{teacher.email}</td>
                   <td>
-                    <button className="btn btn-sm btn-primary">
+                    <button
+                      className="btn btn-sm btn-primary"
+                      onClick={() => handleEdit(teacher.id)}
+                    >
                       <i className="fa fa-pen"></i>
                     </button>
                     <br />
