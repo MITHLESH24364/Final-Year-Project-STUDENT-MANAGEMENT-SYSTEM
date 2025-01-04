@@ -3454,311 +3454,311 @@
 
 // Fourteenth Code
 
-import React, { useState } from "react";
-import studentInfo from "../data/studentInfo";
+// import React, { useState } from "react";
+// import studentInfo from "../data/studentInfo";
 
-const ReportCard = () => {
-  const [classLevel, setClassLevel] = useState("");
-  const [section, setSection] = useState("");
-  const [exam, setExam] = useState("");
-  const [year, setYear] = useState("");
-  const [id, setId] = useState("");
+// const ReportCard = () => {
+//   const [classLevel, setClassLevel] = useState("");
+//   const [section, setSection] = useState("");
+//   const [exam, setExam] = useState("");
+//   const [year, setYear] = useState("");
+//   const [id, setId] = useState("");
 
-  const [filteredData, setFilteredData] = useState([]);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isFilterEmpty, setIsFilterEmpty] = useState(false);
+//   const [filteredData, setFilteredData] = useState([]);
+//   const [isSubmitted, setIsSubmitted] = useState(false);
+//   const [isFilterEmpty, setIsFilterEmpty] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitted(true);
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     setIsSubmitted(true);
 
-    // Check if no filters are applied
-    if (!classLevel && !section && !exam && !year && !id) {
-      setFilteredData([]);
-      setIsFilterEmpty(true);
-      return;
-    }
+//     // Check if no filters are applied
+//     if (!classLevel && !section && !exam && !year && !id) {
+//       setFilteredData([]);
+//       setIsFilterEmpty(true);
+//       return;
+//     }
 
-    // Filtering logic
-    const filteredStudents = studentInfo.filter((student) => {
-      const [classNum, classSec] = student.class.split(" "); // classNum is "10", classSec is "A"
-      const examYear = student.examName.split("-")[1]; // Extract year from the exam name
+//     // Filtering logic
+//     const filteredStudents = studentInfo.filter((student) => {
+//       const [classNum, classSec] = student.class.split(" "); // classNum is "10", classSec is "A"
+//       const examYear = student.examName.split("-")[1]; // Extract year from the exam name
 
-      return (
-        (!classLevel || classNum === classLevel) &&
-        (!section || classSec === section) &&
-        (!exam || student.examName.toLowerCase().includes(exam.toLowerCase())) &&
-        (!year || examYear === year) &&
-        (!id || student.regNo.includes(id))
-      );
-    });
+//       return (
+//         (!classLevel || classNum === classLevel) &&
+//         (!section || classSec === section) &&
+//         (!exam || student.examName.toLowerCase().includes(exam.toLowerCase())) &&
+//         (!year || examYear === year) &&
+//         (!id || student.regNo.includes(id))
+//       );
+//     });
 
-    setFilteredData(filteredStudents);
-    setIsFilterEmpty(false); // Reset empty filter flag if data is found
-  };
+//     setFilteredData(filteredStudents);
+//     setIsFilterEmpty(false); // Reset empty filter flag if data is found
+//   };
 
-  const handleReset = () => {
-    setClassLevel("");
-    setSection("");
-    setExam("");
-    setYear("");
-    setId("");
-    setFilteredData([]);
-    setIsSubmitted(false);
-    setIsFilterEmpty(false);
-  };
+//   const handleReset = () => {
+//     setClassLevel("");
+//     setSection("");
+//     setExam("");
+//     setYear("");
+//     setId("");
+//     setFilteredData([]);
+//     setIsSubmitted(false);
+//     setIsFilterEmpty(false);
+//   };
 
-  const handlePrint = () => {
-    window.print();
-  };
+//   const handlePrint = () => {
+//     window.print();
+//   };
 
-  return (
-    <div className="main-wrapper">
-      <div className="page-wrapper">
-        <div className="content container-fluid">
-          <div className="page-header">
-            <div className="row">
-              <div className="col-sm-12">
-                <div className="page-sub-header">
-                  <h3 className="page-title">Student Marks</h3>
-                  <ul className="breadcrumb">
-                    <li className="breadcrumb-item">
-                      <a href="students.html">Student</a>
-                    </li>
-                    <li className="breadcrumb-item active">Report Card</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
+//   return (
+//     <div className="main-wrapper">
+//       <div className="page-wrapper">
+//         <div className="content container-fluid">
+//           <div className="page-header">
+//             <div className="row">
+//               <div className="col-sm-12">
+//                 <div className="page-sub-header">
+//                   <h3 className="page-title">Student Marks</h3>
+//                   <ul className="breadcrumb">
+//                     <li className="breadcrumb-item">
+//                       <a href="students.html">Student</a>
+//                     </li>
+//                     <li className="breadcrumb-item active">Report Card</li>
+//                   </ul>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
 
-          {/* Filter Section */}
-          <form onSubmit={handleSubmit}>
-            <div className="row mb-3">
-              <div className="col-md-2">
-                <label htmlFor="classSelect" className="form-label">
-                  Class
-                </label>
-                <select
-                  className="form-control"
-                  id="classSelect"
-                  value={classLevel}
-                  onChange={(e) => setClassLevel(e.target.value)}
-                >
-                  <option value="">Select Class</option>
-                  {[...Array(10)].map((_, i) => (
-                    <option key={i + 1} value={10 - i}>
-                      {10 - i}
-                    </option>
-                  ))}
-                </select>
-              </div>
+//           {/* Filter Section */}
+//           <form onSubmit={handleSubmit}>
+//             <div className="row mb-3">
+//               <div className="col-md-2">
+//                 <label htmlFor="classSelect" className="form-label">
+//                   Class
+//                 </label>
+//                 <select
+//                   className="form-control"
+//                   id="classSelect"
+//                   value={classLevel}
+//                   onChange={(e) => setClassLevel(e.target.value)}
+//                 >
+//                   <option value="">Select Class</option>
+//                   {[...Array(10)].map((_, i) => (
+//                     <option key={i + 1} value={10 - i}>
+//                       {10 - i}
+//                     </option>
+//                   ))}
+//                 </select>
+//               </div>
 
-              <div className="col-md-2">
-                <label htmlFor="sectionSelect" className="form-label">
-                  Section
-                </label>
-                <select
-                  className="form-control"
-                  id="sectionSelect"
-                  value={section}
-                  onChange={(e) => setSection(e.target.value)}
-                >
-                  <option value="">Select Section</option>
-                  {["A", "B", "C", "D", "E", "F", "G"].map((sec) => (
-                    <option key={sec} value={sec}>
-                      {sec}
-                    </option>
-                  ))}
-                </select>
-              </div>
+//               <div className="col-md-2">
+//                 <label htmlFor="sectionSelect" className="form-label">
+//                   Section
+//                 </label>
+//                 <select
+//                   className="form-control"
+//                   id="sectionSelect"
+//                   value={section}
+//                   onChange={(e) => setSection(e.target.value)}
+//                 >
+//                   <option value="">Select Section</option>
+//                   {["A", "B", "C", "D", "E", "F", "G"].map((sec) => (
+//                     <option key={sec} value={sec}>
+//                       {sec}
+//                     </option>
+//                   ))}
+//                 </select>
+//               </div>
 
-              <div className="col-md-2">
-                <label htmlFor="examSelect" className="form-label">
-                  Exam Term
-                </label>
-                <select
-                  className="form-control"
-                  id="examSelect"
-                  value={exam}
-                  onChange={(e) => setExam(e.target.value)}
-                >
-                  <option value="">Select Exam Term</option>
-                  {["First Term Examination", "Second Term Examination"].map(
-                    (term, idx) => (
-                      <option key={idx} value={term.toLowerCase()}>
-                        {term}
-                      </option>
-                    )
-                  )}
-                </select>
-              </div>
+//               <div className="col-md-2">
+//                 <label htmlFor="examSelect" className="form-label">
+//                   Exam Term
+//                 </label>
+//                 <select
+//                   className="form-control"
+//                   id="examSelect"
+//                   value={exam}
+//                   onChange={(e) => setExam(e.target.value)}
+//                 >
+//                   <option value="">Select Exam Term</option>
+//                   {["First Term Examination", "Second Term Examination"].map(
+//                     (term, idx) => (
+//                       <option key={idx} value={term.toLowerCase()}>
+//                         {term}
+//                       </option>
+//                     )
+//                   )}
+//                 </select>
+//               </div>
 
-              <div className="col-md-2">
-                <label htmlFor="yearSelect" className="form-label">
-                  Year
-                </label>
-                <select
-                  className="form-control"
-                  id="yearSelect"
-                  value={year}
-                  onChange={(e) => setYear(e.target.value)}
-                >
-                  <option value="">Select Year</option>
-                  {["2081", "2080"].map((yr) => (
-                    <option key={yr} value={yr}>
-                      {yr}
-                    </option>
-                  ))}
-                </select>
-              </div>
+//               <div className="col-md-2">
+//                 <label htmlFor="yearSelect" className="form-label">
+//                   Year
+//                 </label>
+//                 <select
+//                   className="form-control"
+//                   id="yearSelect"
+//                   value={year}
+//                   onChange={(e) => setYear(e.target.value)}
+//                 >
+//                   <option value="">Select Year</option>
+//                   {["2081", "2080"].map((yr) => (
+//                     <option key={yr} value={yr}>
+//                       {yr}
+//                     </option>
+//                   ))}
+//                 </select>
+//               </div>
 
-              <div className="col-md-2">
-                <label htmlFor="idInput" className="form-label">
-                  ID
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="idInput"
-                  value={id}
-                  onChange={(e) => setId(e.target.value)}
-                  placeholder="Enter ID"
-                />
-              </div>
+//               <div className="col-md-2">
+//                 <label htmlFor="idInput" className="form-label">
+//                   ID
+//                 </label>
+//                 <input
+//                   type="text"
+//                   className="form-control"
+//                   id="idInput"
+//                   value={id}
+//                   onChange={(e) => setId(e.target.value)}
+//                   placeholder="Enter ID"
+//                 />
+//               </div>
 
-              <div className="col-md-2 d-flex align-items-end">
-                <button type="submit" className="btn btn-primary">
-                  Filter
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-secondary ms-2"
-                  onClick={handleReset}
-                >
-                  Reset
-                </button>
-              </div>
-            </div>
-          </form>
+//               <div className="col-md-2 d-flex align-items-end">
+//                 <button type="submit" className="btn btn-primary">
+//                   Filter
+//                 </button>
+//                 <button
+//                   type="button"
+//                   className="btn btn-secondary ms-2"
+//                   onClick={handleReset}
+//                 >
+//                   Reset
+//                 </button>
+//               </div>
+//             </div>
+//           </form>
 
-          <button
-            className="btn btn-primary my-3"
-            onClick={handlePrint}
-            style={{ display: filteredData.length > 0 ? "block" : "none" }}
-          >
-            Print Report Cards
-          </button>
+//           <button
+//             className="btn btn-primary my-3"
+//             onClick={handlePrint}
+//             style={{ display: filteredData.length > 0 ? "block" : "none" }}
+//           >
+//             Print Report Cards
+//           </button>
 
-          {/* Render Student Information */}
-          {isSubmitted && filteredData.length > 0 && (
-            <div className="report-cards-container">
-              {filteredData.map((student, idx) => (
-                <div
-                  key={idx}
-                  className="report-card"
-                  style={{ pageBreakAfter: "always" }}
-                >
-                  <div className="student-info">
-                    <div className="student-left">
-                      <p>
-                        <strong>NAME OF THE STUDENT:</strong> {student.fullName}
-                      </p>
-                      <p>
-                        <strong>FATHER NAME:</strong> {student.fatherName}
-                      </p>
-                      <p>
-                        <strong>MOTHER NAME:</strong> {student.motherName}
-                      </p>
-                    </div>
-                    <div className="student-right">
-                      <p>
-                        <strong>REG NO.:</strong> {student.regNo}
-                      </p>
-                      <p>
-                        <strong>CLASS:</strong> {student.class}
-                      </p>
-                      <p>
-                        <strong>DOB:</strong> {student.dob}
-                      </p>
-                    </div>
-                  </div>
+//           {/* Render Student Information */}
+//           {isSubmitted && filteredData.length > 0 && (
+//             <div className="report-cards-container">
+//               {filteredData.map((student, idx) => (
+//                 <div
+//                   key={idx}
+//                   className="report-card"
+//                   style={{ pageBreakAfter: "always" }}
+//                 >
+//                   <div className="student-info">
+//                     <div className="student-left">
+//                       <p>
+//                         <strong>NAME OF THE STUDENT:</strong> {student.fullName}
+//                       </p>
+//                       <p>
+//                         <strong>FATHER NAME:</strong> {student.fatherName}
+//                       </p>
+//                       <p>
+//                         <strong>MOTHER NAME:</strong> {student.motherName}
+//                       </p>
+//                     </div>
+//                     <div className="student-right">
+//                       <p>
+//                         <strong>REG NO.:</strong> {student.regNo}
+//                       </p>
+//                       <p>
+//                         <strong>CLASS:</strong> {student.class}
+//                       </p>
+//                       <p>
+//                         <strong>DOB:</strong> {student.dob}
+//                       </p>
+//                     </div>
+//                   </div>
 
-                  <h3 className="exam-title">{student.examName}</h3>
+//                   <h3 className="exam-title">{student.examName}</h3>
 
-                  <table className="report-table">
-                    <thead>
-                      <tr>
-                        <th>S.N</th>
-                        <th>SUBJECTS</th>
-                        <th>CREDIT HOUR (CH)</th>
-                        <th>GRADE POINT (GP)</th>
-                        <th>GRADE</th>
-                        <th>FINAL GRADE</th>
-                        <th>REMARKS</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {student.subjects.map((subject, index) => (
-                        <tr key={index}>
-                          <td>{index + 1}</td>
-                          <td>{subject.name}</td>
-                          <td>{subject.creditHour}</td>
-                          <td>{subject.gradePoint}</td>
-                          <td>{subject.grade}</td>
-                          <td>{subject.finalGrade}</td>
-                          <td>{/* Add remarks logic if needed */}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+//                   <table className="report-table">
+//                     <thead>
+//                       <tr>
+//                         <th>S.N</th>
+//                         <th>SUBJECTS</th>
+//                         <th>CREDIT HOUR (CH)</th>
+//                         <th>GRADE POINT (GP)</th>
+//                         <th>GRADE</th>
+//                         <th>FINAL GRADE</th>
+//                         <th>REMARKS</th>
+//                       </tr>
+//                     </thead>
+//                     <tbody>
+//                       {student.subjects.map((subject, index) => (
+//                         <tr key={index}>
+//                           <td>{index + 1}</td>
+//                           <td>{subject.name}</td>
+//                           <td>{subject.creditHour}</td>
+//                           <td>{subject.gradePoint}</td>
+//                           <td>{subject.grade}</td>
+//                           <td>{subject.finalGrade}</td>
+//                           <td>{/* Add remarks logic if needed */}</td>
+//                         </tr>
+//                       ))}
+//                     </tbody>
+//                   </table>
 
-                  <div className="footer">
-                    <p>
-                      <strong>Total Credit Hours:</strong> {student.totalCreditHours}
-                    </p>
-                    <p>
-                      <strong>GPA:</strong> {student.gpa}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+//                   <div className="footer">
+//                     <p>
+//                       <strong>Total Credit Hours:</strong> {student.totalCreditHours}
+//                     </p>
+//                     <p>
+//                       <strong>GPA:</strong> {student.gpa}
+//                     </p>
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           )}
 
-          {isSubmitted && filteredData.length === 0 && !isFilterEmpty && (
-            <p>No students match the filter criteria.</p>
-          )}
-        </div>
-      </div>
+//           {isSubmitted && filteredData.length === 0 && !isFilterEmpty && (
+//             <p>No students match the filter criteria.</p>
+//           )}
+//         </div>
+//       </div>
 
 
-      {/* Print Styling */}
-      <style>
-        {`
-          @media print {
-            body * {
-              visibility: hidden;
-            }
-            #printArea, #printArea * {
-              visibility: visible;
-            }
-            #printArea {
-              position: absolute;
-              left: 0;
-              top: 0;
-            }
-            .report-card {
-              page-break-after: always;
-              padding: 20px;
-              margin-bottom: 20px;
-              border: 1px solid #ddd;
-            }
-          }
-        `}
-      </style>
-    </div>
-  );
-};
+//       {/* Print Styling */}
+//       <style>
+//         {`
+//           @media print {
+//             body * {
+//               visibility: hidden;
+//             }
+//             #printArea, #printArea * {
+//               visibility: visible;
+//             }
+//             #printArea {
+//               position: absolute;
+//               left: 0;
+//               top: 0;
+//             }
+//             .report-card {
+//               page-break-after: always;
+//               padding: 20px;
+//               margin-bottom: 20px;
+//               border: 1px solid #ddd;
+//             }
+//           }
+//         `}
+//       </style>
+//     </div>
+//   );
+// };
 
-export default ReportCard;
+// export default ReportCard;
