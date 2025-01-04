@@ -48,6 +48,7 @@ const Login = ({ setIsAuthenticated }) => {
       localStorage.setItem("authToken", basicAuthToken);
       localStorage.setItem("isLogin", 1);
       localStorage.setItem("fullname", data.staff.fullname); // Save fullname
+      localStorage.setItem("role", data.staff.role); // Save role
       // Update authentication state and navigate
       setIsAuthenticated(true); // Notify parent about authentication status
       navigate("/"); // Redirect to Admin Dashboard or any specific route
@@ -120,9 +121,6 @@ const Login = ({ setIsAuthenticated }) => {
                     </button>
                   </div>
                 </form>
-                <h3>Demo id:</h3>
-                <p>Username: admin</p>
-                <p>Password: admin</p>
               </div>
             </div>
           </div>
