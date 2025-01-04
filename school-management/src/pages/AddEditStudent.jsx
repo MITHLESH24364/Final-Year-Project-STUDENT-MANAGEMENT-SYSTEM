@@ -89,42 +89,112 @@ const AddEditStudent = () => {
     setFormData({ ...formData, dateOfBirth: date });
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const authToken = localStorage.getItem("authToken");
+
+  //   if (!authToken) {
+  //     console.error("Authentication token not found. Please log in.");
+  //     return;
+  //   }
+
+  //   try {
+  //     const formDataObject = new FormData();
+  //     Object.entries(formData).forEach(([key, value]) => {
+  //       formDataObject.append(key, value);
+  //     });
+
+  //     const endpoint = id
+  //       ? `http://localhost:8080/sms/user/student/update/${id}`
+  //       : "http://localhost:8080/sms/user/student/add";
+
+  //     const method = id ? "PUT" : "POST";
+
+  //     const response = await fetch(endpoint, {
+  //       method,
+  //       body: JSON.stringify(formData),
+  //        headers: {
+  //            "Content-Type": "application/json",
+  //         Authorization: `Basic ${authToken}`,
+  //           },
+  //     });
+
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       console.log(`${id ? "Student updated" : "Student added"} successfully:`, data);
+  //       alert(`${id ? "Student updated" : "Student added"} successfully!`);
+  //       if (!id) {
+  //         setFormData({
+  //           fullname: "",
+  //           gender: "",
+  //           dateOfBirth: "",
+  //           rollNo: "",
+  //           location: "",
+  //           bloodGroup: "",
+  //           religion: "",
+  //           email: "",
+  //           studentClass: "",
+  //           section: "",
+  //           phoneNumber: "",
+  //           parentName: "",
+  //           parentNo: "",
+  //           studentPhoto: null,
+  //         });
+  //       }
+  //     } else {
+  //       const errorData = await response.json();
+  //       throw new Error(errorData.message || `Error ${id ? "updating" : "adding"} student.`);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     setError(error.message);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const authToken = localStorage.getItem("authToken");
-
+  
     if (!authToken) {
       console.error("Authentication token not found. Please log in.");
       return;
     }
-
+  
     try {
+      // Create FormData object
       const formDataObject = new FormData();
       Object.entries(formData).forEach(([key, value]) => {
-        formDataObject.append(key, value);
+        if (value instanceof Date) {
+          formDataObject.append(key, value.toISOString()); // Convert Date to ISO string
+        } else if (value) {
+          formDataObject.append(key, value);
+        }
       });
-
+  
+      // Determine API endpoint and method
       const endpoint = id
         ? `http://localhost:8080/sms/user/student/update/${id}`
         : "http://localhost:8080/sms/user/student/add";
-
       const method = id ? "PUT" : "POST";
-
+  
       const response = await fetch(endpoint, {
         method,
-        body: formDataObject,
         headers: {
-          "Content-Type": "application/json",
-       Authorization: `Basic ${authToken}`,
-         },
+          Authorization: `Basic ${authToken}`,
+          ...(id ? { "Content-Type": "application/json" } : {}), // Add headers only for JSON
+        },
+        body: id ? JSON.stringify(Object.fromEntries(formDataObject)) : formDataObject,
       });
-
+  
       if (response.ok) {
         const data = await response.json();
         console.log(`${id ? "Student updated" : "Student added"} successfully:`, data);
         alert(`${id ? "Student updated" : "Student added"} successfully!`);
+  
+        // Reset form data if adding a new student
         if (!id) {
           setFormData({
+            accountId: "",
             fullname: "",
             gender: "",
             dateOfBirth: "",
@@ -150,7 +220,7 @@ const AddEditStudent = () => {
       setError(error.message);
     }
   };
-
+  
   return (
    
     <div>
@@ -270,7 +340,7 @@ const AddEditStudent = () => {
                   />
                 </div>
               </div>
-
+ 
               <div className="col-12 col-sm-4">
                 <div className="form-group">
                   <label>Upload Student Photo (150px X 150px)</label>
