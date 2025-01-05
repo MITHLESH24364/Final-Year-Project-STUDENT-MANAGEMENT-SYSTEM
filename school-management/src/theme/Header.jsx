@@ -277,7 +277,7 @@ const Header = () => {
             <span className="user-img">
               <img
                 className="rounded-circle"
-                src={`assets/img/profiles/${image}`}
+                src={image || "user"}
                 width="31"
                 alt={fullname || "User"}
               />
@@ -290,7 +290,7 @@ const Header = () => {
               </button>
             </span>
           </a>
-          <div className="dropdown-menu">
+          {/* <div className="dropdown-menu">
             <div className="user-header">
               <div className="avatar avatar-sm">
                 <img
@@ -309,7 +309,7 @@ const Header = () => {
             <a className="dropdown-item" onClick={logout}>
               Logout
             </a>
-          </div>
+          </div> */}
         </li>
       </ul>
     </div>
