@@ -170,16 +170,20 @@ const AddAttendance = () => {
     );
   };
 
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
     const attendanceData = filteredStudents.map((student) => ({
       sid: student.accountId,
-      date: filters.attendanceDate,
+      date: filters.attendanceDate, // Ensure this only contains the date
       present: student.present ? "p" : null,
       late: student.late ? "l" : null,
       absent: !student.present && !student.late ? "a" : null,
     }));
-
+  
     const authToken = localStorage.getItem("authToken");
     try {
       const response = await fetch("http://localhost:8080/sms/attandence/bulk-add", {
@@ -190,7 +194,7 @@ const AddAttendance = () => {
         },
         body: JSON.stringify(attendanceData),
       });
-
+  
       if (response.ok) {
         console.log("Bulk attendance submitted successfully!");
         setIsSubmitted(true); // Set success state
@@ -201,6 +205,8 @@ const AddAttendance = () => {
       console.error("Error:", error);
     }
   };
+  
+  
 
   return (
     <div className="main-wrapper">
