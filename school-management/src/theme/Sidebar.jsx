@@ -231,17 +231,17 @@ const Sidebar = () => {
                 title: "Departments",
                 icon: "fas fa-building",
                 submenu: [
-                  { path: "#", label: "Department List" },
-                  { path: "#", label: "Department Add" },
-                  { path: "#", label: "Department Edit" },
+                  { path: "/view-department", label: "Department List" },
+                  { path: "/add-department", label: "Department Add" },
+                  { path: "/edit-department", label: "Department Edit" },
                 ],
               },
               {
                 title: "Subjects",
                 icon: "fas fa-book-reader",
                 submenu: [
-                  { path: "#", label: "Subject List" },
-                  { path: "#", label: "Subject Add" },
+                  { path: "/view-subject", label: "Subject List" },
+                  { path: "/add-subject", label: "Subject Add" },
                   { path: "#", label: "Subject Edit" },
                 ],
               },

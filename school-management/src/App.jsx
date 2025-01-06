@@ -20,6 +20,16 @@ import ContactPage from './pages/ContactPage';
 import AttendanceTable from './pages/AttendanceTable';
 import AddEditStudent from './pages/AddEditStudent'
 import EditTeacher from './pages/EditTeacher';
+import ViewDepartment from './pages/ViewDepartment';
+import AddDepartment from './pages/AddDepartment';
+import AddSubject from './pages/AddSubject';
+import ViewSubject from './pages/ViewSubject';
+import EditDepartment from './pages/EditDepartment';
+import DeleteDepartment from './pages/DeleteDepartment';
+
+
+
+
 
 // Protected Route Component
 const PrivateRoute = ({ isAuthenticated, children }) => {
@@ -66,6 +76,14 @@ function App() {
                     <Route path="edit-student" element={<PrivateRout component= {AddEditStudent} />} />
                     <Route path="edit-teacher/:id" element={<PrivateRout component= {EditTeacher} />} />
                     <Route path="edit-teacher" element={<PrivateRout component= {EditTeacher} />} />
+                    <Route path="view-department" element={<PrivateRout component= {ViewDepartment} />} />
+                    <Route path="add-department" element={<PrivateRout component= {AddDepartment} />} />
+                    <Route path="edit-department" element={<PrivateRout component= {EditDepartment} />} />
+                    <Route path="edit-department/:id" element={<PrivateRout component= {EditDepartment} />} />
+                    <Route path="delete-department/:id" element={<PrivateRout component= {DeleteDepartment} />} />
+                    <Route path="add-subject" element={<PrivateRout component= {AddSubject} />} />
+                    <Route path="view-subject" element={<PrivateRout component= {ViewSubject} />} />
+
 
 
                 </Route>
