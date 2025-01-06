@@ -5,7 +5,9 @@ const Login = ({ setIsAuthenticated }) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    rememberMe: false,
+    rememberMe: true,
+   
+
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -48,7 +50,9 @@ const Login = ({ setIsAuthenticated }) => {
       localStorage.setItem("authToken", basicAuthToken);
       localStorage.setItem("isLogin", 1);
       localStorage.setItem("fullname", data.staff.fullname); // Save fullname
-      localStorage.setItem("role", data.staff.role); // Save role
+      localStorage.setItem("department", data.staff.department); // Save role
+      // localStorage.setItem("role", data.staff.role); // Save role
+      localStorage.setItem("image", data.staff.image); // Save image
       // Update authentication state and navigate
       setIsAuthenticated(true); // Notify parent about authentication status
       navigate("/"); // Redirect to Admin Dashboard or any specific route

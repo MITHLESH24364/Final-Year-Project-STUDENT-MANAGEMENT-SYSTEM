@@ -240,13 +240,14 @@ const AddTeacher = () => {
                         onChange={handleChange}
                       >
                         <option>Please Select Department</option>
-                        <option>English</option>
-                        <option>Nepali</option>
-                        <option>Maths</option>
-                        <option>Science</option>
-                        <option>Social</option>
-                        <option>Computer</option>
-                        <option>Accountancy</option>
+                        <option>ADMIN</option>
+                        <option>English Department</option>
+                        <option>Nepali Department</option>
+                        <option>Maths Department</option>
+                        <option>Science Department</option>
+                        <option>Social Department</option>
+                        <option>Computer Department</option>
+                        <option>Accountancy Department</option>
                       </select>
                     </div>
                   </div>
