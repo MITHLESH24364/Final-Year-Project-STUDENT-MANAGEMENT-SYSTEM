@@ -31,6 +31,7 @@ import DeleteSubject from './pages/DeleteSubject';
 import ViewClass from './pages/ViewClass';
 import AddClass from './pages/AddClass';
 import EditClass from './pages/EditClass';
+import DeleteClass from './pages/DeleteClass';
 
 
 
@@ -95,6 +96,7 @@ function App() {
                     <Route path="add-class" element={<PrivateRout component= {AddClass} />} />
                     <Route path="edit-class" element={<PrivateRout component= {EditClass} />} />
                     <Route path="edit-class/:id" element={<PrivateRout component= {EditClass} />} />
+                    <Route path="delete-class/:id" element={<PrivateRout component= {DeleteClass} />} />
 
 
 
