@@ -242,7 +242,7 @@ const Sidebar = () => {
                 submenu: [
                   { path: "/view-subject", label: "Subject List" },
                   { path: "/add-subject", label: "Subject Add" },
-                  { path: "#", label: "Subject Edit" },
+                  { path: "/edit-subject", label: "Subject Edit" },
                 ],
               },
               {

@@ -38,7 +38,7 @@ const EditDepartment = () => {
                         departmentName: data.departmentName,
                         headOfDepartment: data.headOfDepartment,
                         startDate: data.startDate,
-                    });
+                    })
                 } else if (response.status === 404) {
                     throw new Error("teacher not found.");
                   } else {

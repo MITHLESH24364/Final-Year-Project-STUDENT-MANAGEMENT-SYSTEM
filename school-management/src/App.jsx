@@ -22,10 +22,12 @@ import AddEditStudent from './pages/AddEditStudent'
 import EditTeacher from './pages/EditTeacher';
 import ViewDepartment from './pages/ViewDepartment';
 import AddDepartment from './pages/AddDepartment';
-import AddSubject from './pages/AddSubject';
-import ViewSubject from './pages/ViewSubject';
 import EditDepartment from './pages/EditDepartment';
 import DeleteDepartment from './pages/DeleteDepartment';
+import AddSubject from './pages/AddSubject';
+import ViewSubject from './pages/ViewSubject';
+import UpdateSubject from './pages/UpdateSubject';
+import DeleteSubject from './pages/DeleteSubject';
 
 
 
@@ -83,6 +85,10 @@ function App() {
                     <Route path="delete-department/:id" element={<PrivateRout component= {DeleteDepartment} />} />
                     <Route path="add-subject" element={<PrivateRout component= {AddSubject} />} />
                     <Route path="view-subject" element={<PrivateRout component= {ViewSubject} />} />
+                    <Route path="edit-subject/:id" element={<PrivateRout component= {UpdateSubject} />} />
+                    <Route path="edit-subject" element={<PrivateRout component= {UpdateSubject} />} />
+                    <Route path="delete-subject/:id" element={<PrivateRout component= {DeleteSubject} />} />
+
 
 
 
