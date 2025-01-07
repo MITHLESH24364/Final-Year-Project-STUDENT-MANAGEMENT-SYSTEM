@@ -246,6 +246,15 @@ const Sidebar = () => {
                 ],
               },
               {
+                title: "Classes",
+                icon: "fas fa-building",
+                submenu: [
+                  { path: "/view-class", label: "Class List" },
+                  { path: "/add-class", label: "CLass Add" },
+                  { path: "/edit-class", label: "Class Edit" },
+                ],
+              },
+              {
                 title: "Contact",
                 icon: "fas fa-check",
                 submenu: [

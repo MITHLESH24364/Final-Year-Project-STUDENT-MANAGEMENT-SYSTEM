@@ -28,6 +28,9 @@ import AddSubject from './pages/AddSubject';
 import ViewSubject from './pages/ViewSubject';
 import UpdateSubject from './pages/UpdateSubject';
 import DeleteSubject from './pages/DeleteSubject';
+import ViewClass from './pages/ViewClass';
+import AddClass from './pages/AddClass';
+import EditClass from './pages/EditClass';
 
 
 
@@ -88,6 +91,10 @@ function App() {
                     <Route path="edit-subject/:id" element={<PrivateRout component= {UpdateSubject} />} />
                     <Route path="edit-subject" element={<PrivateRout component= {UpdateSubject} />} />
                     <Route path="delete-subject/:id" element={<PrivateRout component= {DeleteSubject} />} />
+                    <Route path="view-class" element={<PrivateRout component= {ViewClass} />} />
+                    <Route path="add-class" element={<PrivateRout component= {AddClass} />} />
+                    <Route path="edit-class" element={<PrivateRout component= {EditClass} />} />
+                    <Route path="edit-class/:id" element={<PrivateRout component= {EditClass} />} />
 
 
 
