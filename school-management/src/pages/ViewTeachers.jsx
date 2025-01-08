@@ -318,7 +318,7 @@ const ViewTeachers = () => {
                   <td>
                     <img
                       src={`assets/img/profiles/${teacher.image || "mks.jpg"}`} // Fallback for missing images
-                      alt={teacher.fullname}
+                      // alt={teacher.fullname}
                       className="rounded-circle"
                       width="35"
                     />
