@@ -215,8 +215,9 @@ import React, { useEffect, useState } from "react";
 
 const Header = () => {
   const [fullname, setFullname] = useState("");
-  const [department, setDepartment] = useState("");
+  // const [department, setDepartment] = useState("");
   const [image, setImage] = useState(""); // Default image
+  const [role, setRole] = useState("");
 
   useEffect(() => {
     // Retrieve user details from localStorage
@@ -225,9 +226,14 @@ const Header = () => {
       setFullname(storedFullname);
     }
 
-    const storedDepartment = localStorage.getItem("department");
-    if (storedDepartment) {
-      setDepartment(storedDepartment);
+    // const storedDepartment = localStorage.getItem("department");
+    // if (storedDepartment) {
+    //   setDepartment(storedDepartment);
+    // }
+
+    const storedRole = localStorage.getItem("role");
+    if (storedRole) {
+      setRole(storedRole);
     }
 
     const storedImage = localStorage.getItem("image");
@@ -240,7 +246,7 @@ const Header = () => {
     localStorage.removeItem("isLogin");
     localStorage.removeItem("authToken");
     localStorage.removeItem("fullname");
-    localStorage.removeItem("department");
+    localStorage.removeItem("role");
     localStorage.removeItem("image"); // Clear image on logout
     window.location.href = "/";
   };
@@ -283,7 +289,7 @@ const Header = () => {
               />
               <div className="user-text">
                 <h6>{fullname || "User"}</h6>
-                <p className="text-muted mb-0">{department || "Department"}</p>
+                <p className="text-muted mb-0">{role || "Role"}</p>
               </div>
               <button onClick={logout} className="btn btn-danger" href="">
                 <i className="fas fa-sign-out-alt"></i>

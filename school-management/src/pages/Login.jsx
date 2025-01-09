@@ -50,17 +50,25 @@ const Login = ({ setIsAuthenticated }) => {
       localStorage.setItem("authToken", basicAuthToken);
       localStorage.setItem("isLogin", 1);
       localStorage.setItem("fullname", data.staff.fullname); // Save fullname
-      localStorage.setItem("department", data.staff.department); // Save role
-      // localStorage.setItem("role", data.staff.role); // Save role
+      // localStorage.setItem("department", data.staff.department); // Save department
+      localStorage.setItem("role", data.role); // Save role
       localStorage.setItem("image", data.staff.image); // Save image
-      // Update authentication state and navigate
+  
+      // Update authentication state
       setIsAuthenticated(true); // Notify parent about authentication status
-      navigate("/"); // Redirect to Admin Dashboard or any specific route
+  
+      // Conditional navigation based on role
+      if (data.role === "TEACHER") {
+        navigate("/teacher-dashboard"); // Redirect to teacher dashboard
+      } else {
+        navigate("/"); // Redirect to default Admin Dashboard or another route
+      }
     } catch (error) {
       console.error("Error during login:", error.message);
       setError(error.message);
     }
   };
+  
   
   return (
     <div className="main-wrapper login-body">

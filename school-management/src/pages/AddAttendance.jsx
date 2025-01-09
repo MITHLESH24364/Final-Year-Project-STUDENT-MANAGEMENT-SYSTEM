@@ -58,6 +58,64 @@ const AddAttendance = () => {
 
   
 
+  // const fetchAttendanceForDate = async () => {
+  //   const authToken = localStorage.getItem("authToken");
+  //   if (!authToken) {
+  //     console.error("Authentication token not found. Please log in.");
+  //     return;
+  //   }
+  
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:8080/sms/attandence/getByDate?date=${filters.attendanceDate}&class=${filters.class}&section=${filters.section}`,
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Basic ${authToken}`,
+  //         },
+  //       }
+  //     );
+  
+  //     if (response.ok) {
+  //       const attendanceData = await response.json();
+  
+  //       // Map fetched attendance data to students
+  //       setFilteredStudents((prevStudents) =>
+  //         prevStudents.map((student) => {
+  //           const attendance = attendanceData.find(
+  //             (record) => record.sid === student.accountId
+  //           );
+  
+  //           // Update attendance or default to 'a'
+  //           return attendance
+  //             ? {
+  //                 ...student,
+  //                 present: attendance.present === "p",
+  //                 late: attendance.late === "l",
+  //               }
+  //             : {
+  //                 ...student,
+  //                 present: false, // Default to absent
+  //                 late: false,
+  //               };
+  //         })
+  //       );
+  //     } else {
+  //       console.error("Error fetching attendance:", response.statusText);
+  //       setFilteredStudents((prevStudents) =>
+  //         prevStudents.map((student) => ({
+  //           ...student,
+  //           present: false, // Default to absent
+  //           late: false,
+  //         }))
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
+  
+  
   const fetchAttendanceForDate = async () => {
     const authToken = localStorage.getItem("authToken");
     if (!authToken) {
@@ -79,19 +137,19 @@ const AddAttendance = () => {
       if (response.ok) {
         const attendanceData = await response.json();
   
-        // Map fetched attendance data to students
-        setFilteredStudents((prevStudents) =>
-          prevStudents.map((student) => {
+        // Map attendance data to filtered students
+        setFilteredStudents((prevFilteredStudents) =>
+          prevFilteredStudents.map((student) => {
             const attendance = attendanceData.find(
               (record) => record.sid === student.accountId
             );
   
-            // Update attendance or default to 'a'
+            // Update attendance or default to 'absent'
             return attendance
               ? {
                   ...student,
-                  present: attendance.present === "p",
-                  late: attendance.late === "l",
+                  present: attendance.present === "p", // Check if 'present' is "p"
+                  late: attendance.late === "l", // Check if 'late' is "l"
                 }
               : {
                   ...student,
@@ -102,19 +160,11 @@ const AddAttendance = () => {
         );
       } else {
         console.error("Error fetching attendance:", response.statusText);
-        setFilteredStudents((prevStudents) =>
-          prevStudents.map((student) => ({
-            ...student,
-            present: false, // Default to absent
-            late: false,
-          }))
-        );
       }
     } catch (error) {
       console.error("Error:", error);
     }
   };
-  
   
 
 
@@ -122,6 +172,25 @@ const AddAttendance = () => {
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters({ ...filters, [name]: value });
+  };
+
+  const handleDateFilterChange = (e) => {
+    const { name, value } = e.target;
+
+    // If the attendanceDate is being changed, ensure it's formatted correctly
+    if (name === "attendanceDate") {
+      const formattedDate = new Date(value).toISOString().split("T")[0];
+      console.log("Selected Date:", formattedDate); // Logs the formatted date
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        [name]: formattedDate,
+      }));
+    } else {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        [name]: value,
+      }));
+    }
   };
 
  
@@ -178,6 +247,7 @@ const AddAttendance = () => {
   
     const attendanceData = filteredStudents.map((student) => ({
       sid: student.accountId,
+      fullname:student.fullname,
       date: filters.attendanceDate, // Ensure this only contains the date
       present: student.present ? "p" : null,
       late: student.late ? "l" : null,
@@ -258,7 +328,7 @@ const AddAttendance = () => {
                   className="form-control"
                   name="attendanceDate"
                   value={filters.attendanceDate}
-                  onChange={handleFilterChange}
+                  onChange={handleDateFilterChange}
                 />
               </div>
               <div className="col-md-3">
