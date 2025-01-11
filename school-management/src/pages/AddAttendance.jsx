@@ -57,65 +57,6 @@ const AddAttendance = () => {
   }, []);
 
   
-
-  // const fetchAttendanceForDate = async () => {
-  //   const authToken = localStorage.getItem("authToken");
-  //   if (!authToken) {
-  //     console.error("Authentication token not found. Please log in.");
-  //     return;
-  //   }
-  
-  //   try {
-  //     const response = await fetch(
-  //       `http://localhost:8080/sms/attandence/getByDate?date=${filters.attendanceDate}&class=${filters.class}&section=${filters.section}`,
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Basic ${authToken}`,
-  //         },
-  //       }
-  //     );
-  
-  //     if (response.ok) {
-  //       const attendanceData = await response.json();
-  
-  //       // Map fetched attendance data to students
-  //       setFilteredStudents((prevStudents) =>
-  //         prevStudents.map((student) => {
-  //           const attendance = attendanceData.find(
-  //             (record) => record.sid === student.accountId
-  //           );
-  
-  //           // Update attendance or default to 'a'
-  //           return attendance
-  //             ? {
-  //                 ...student,
-  //                 present: attendance.present === "p",
-  //                 late: attendance.late === "l",
-  //               }
-  //             : {
-  //                 ...student,
-  //                 present: false, // Default to absent
-  //                 late: false,
-  //               };
-  //         })
-  //       );
-  //     } else {
-  //       console.error("Error fetching attendance:", response.statusText);
-  //       setFilteredStudents((prevStudents) =>
-  //         prevStudents.map((student) => ({
-  //           ...student,
-  //           present: false, // Default to absent
-  //           late: false,
-  //         }))
-  //       );
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   }
-  // };
-  
-  
   const fetchAttendanceForDate = async () => {
     const authToken = localStorage.getItem("authToken");
     if (!authToken) {
@@ -165,6 +106,42 @@ const AddAttendance = () => {
       console.error("Error:", error);
     }
   };
+  
+  // const fetchAttendanceForDate = async () => {
+  //   const authToken = localStorage.getItem("authToken");
+  //   if (!authToken) {
+  //     console.error("Authentication token not found. Please log in.");
+  //     return;
+  //   }
+  
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:8080/sms/attandence/getByDate?date=${filters.attendanceDate}&class=${filters.class}&section=${filters.section}`,
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Basic ${authToken}`,
+  //         },
+  //       }
+  //     );
+  
+  //     if (response.ok) {
+  //       const attendanceData = await response.json();
+  
+  //       setFilteredStudents(
+  //         attendanceData.map((record) => ({
+  //           ...record,
+  //           present: record.present === "p",
+  //           late: record.late === "l",
+  //         }))
+  //       );
+  //     } else {
+  //       console.error("Error fetching attendance:", response.statusText);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
   
 
 
@@ -276,6 +253,43 @@ const AddAttendance = () => {
     }
   };
   
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     const attendanceData = filteredStudents.map((student) => ({
+//         sid: student.accountId,
+//         fullname: student.fullname,
+//         studentClass: filters.class, // Add class
+//         section: filters.section, // Add section
+//         date: filters.attendanceDate,
+//         present: student.present ? "p" : null,
+//         late: student.late ? "l" : null,
+//         absent: !student.present && !student.late ? "a" : null,
+//     }));
+
+//     const authToken = localStorage.getItem("authToken");
+//     try {
+//         const response = await fetch("http://localhost:8080/sms/attandence/bulk-add", {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 Authorization: `Basic ${authToken}`,
+//             },
+//             body: JSON.stringify(attendanceData),
+//         });
+
+//         if (response.ok) {
+//             console.log("Bulk attendance submitted successfully!");
+//             setIsSubmitted(true);
+//         } else {
+//             console.error("Error submitting attendance:", response.statusText);
+//         }
+//     } catch (error) {
+//         console.error("Error:", error);
+//     }
+// };
+
   
 
   return (
