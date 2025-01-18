@@ -57,56 +57,6 @@ const AddAttendance = () => {
   }, []);
 
   
-  const fetchAttendanceForDate = async () => {
-    const authToken = localStorage.getItem("authToken");
-    if (!authToken) {
-      console.error("Authentication token not found. Please log in.");
-      return;
-    }
-  
-    try {
-      const response = await fetch(
-        `http://localhost:8080/sms/attandence/getByDate?date=${filters.attendanceDate}&class=${filters.class}&section=${filters.section}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Basic ${authToken}`,
-          },
-        }
-      );
-  
-      if (response.ok) {
-        const attendanceData = await response.json();
-  
-        // Map attendance data to filtered students
-        setFilteredStudents((prevFilteredStudents) =>
-          prevFilteredStudents.map((student) => {
-            const attendance = attendanceData.find(
-              (record) => record.sid === student.accountId
-            );
-  
-            // Update attendance or default to 'absent'
-            return attendance
-              ? {
-                  ...student,
-                  present: attendance.present === "p", // Check if 'present' is "p"
-                  late: attendance.late === "l", // Check if 'late' is "l"
-                }
-              : {
-                  ...student,
-                  present: false, // Default to absent
-                  late: false,
-                };
-          })
-        );
-      } else {
-        console.error("Error fetching attendance:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-  
   // const fetchAttendanceForDate = async () => {
   //   const authToken = localStorage.getItem("authToken");
   //   if (!authToken) {
@@ -128,12 +78,26 @@ const AddAttendance = () => {
   //     if (response.ok) {
   //       const attendanceData = await response.json();
   
-  //       setFilteredStudents(
-  //         attendanceData.map((record) => ({
-  //           ...record,
-  //           present: record.present === "p",
-  //           late: record.late === "l",
-  //         }))
+  //       // Map attendance data to filtered students
+  //       setFilteredStudents((prevFilteredStudents) =>
+  //         prevFilteredStudents.map((student) => {
+  //           const attendance = attendanceData.find(
+  //             (record) => record.sid === student.accountId
+  //           );
+  
+  //           // Update attendance or default to 'absent'
+  //           return attendance
+  //             ? {
+  //                 ...student,
+  //                 present: attendance.present === "p", // Check if 'present' is "p"
+  //                 late: attendance.late === "l", // Check if 'late' is "l"
+  //               }
+  //             : {
+  //                 ...student,
+  //                 present: false, // Default to absent
+  //                 late: false,
+  //               };
+  //         })
   //       );
   //     } else {
   //       console.error("Error fetching attendance:", response.statusText);
@@ -143,7 +107,100 @@ const AddAttendance = () => {
   //   }
   // };
   
+  
 
+  // const fetchAttendanceForDate = async () => {
+  //   const authToken = localStorage.getItem("authToken");
+  //   if (!authToken) {
+  //     console.error("Authentication token not found. Please log in.");
+  //     return;
+  //   }
+  
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:8080/sms/attandence/getByDate?date=${filters.attendanceDate}&class=${filters.class}&section=${filters.section}`,
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Basic ${authToken}`,
+  //         },
+  //       }
+  //     );
+  
+  //     if (response.ok) {
+  //       const data = await response.json();
+  
+  //       setFilteredStudents(data.map(({ attendance, studentDetail }) => ({
+  //         ...studentDetail,
+  //         present: attendance.present === "p",
+  //         late: attendance.late === "l",
+  //         absent: attendance.absent === "a",
+  //       })));
+  //     } else {
+  //       console.error("Error fetching attendance:", response.statusText);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
+  
+
+
+  const fetchAttendanceForDate = async () => {
+    const authToken = localStorage.getItem("authToken");
+    if (!authToken) {
+      console.error("Authentication token not found. Please log in.");
+      return;
+    }
+  
+    try {
+      const response = await fetch(
+        `http://localhost:8080/sms/attandence/getByDate?date=${filters.attendanceDate}&class=${filters.class}&section=${filters.section}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Basic ${authToken}`,
+          },
+        }
+      );
+  
+      if (response.ok) {
+        const attendanceData = await response.json();
+  
+        // Update filtered students
+        setFilteredStudents((prevFilteredStudents) =>
+          prevFilteredStudents.map((student) => {
+            const attendanceRecord = attendanceData.find(
+              (record) => record.sid === student.accountId
+            );
+  
+            // Check if attendance record exists
+            if (attendanceRecord) {
+              return {
+                ...student,
+                present: attendanceRecord.present === "p",
+                late: attendanceRecord.late === "l",
+                absent: attendanceRecord.absent === "a",
+              };
+            }
+  
+            // Default to absent if no record found
+            return {
+              ...student,
+              present: false,
+              late: false,
+              absent: true,
+            };
+          })
+        );
+      } else {
+        console.error("Error fetching attendance:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  
 
 
   const handleFilterChange = (e) => {
@@ -370,6 +427,7 @@ const AddAttendance = () => {
               <table className="table">
                 <thead>
                   <tr>
+                    <th>Student Id</th>
                     <th>Student Name</th>
                     <th>Roll</th>
                     <th>
@@ -389,6 +447,7 @@ const AddAttendance = () => {
                 <tbody>
                   {filteredStudents.map((student) => (
                     <tr key={student.accountId}>
+                      <td>{student.accountId}</td>
                       <td>{student.fullname}</td>
                       <td>{student.rollNo}</td>
                       <td>
