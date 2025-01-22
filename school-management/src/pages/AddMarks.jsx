@@ -55,7 +55,9 @@ const AddMarks = () => {
       ...prevMarks,
       [studentId]: value,
     }));
+    console.log(marks);
   };
+
 
 
   // const fetchExistingMarks = async () => {
@@ -71,9 +73,12 @@ const AddMarks = () => {
   //       const data = await response.json();
   //       const marksMap = {};
   //       data.forEach((record) => {
-  //         marksMap[record.student] = record.marks;
+  //         console .log(record);
+  //         marksMap[record.student] = record.marks; // Ensure marksMap is keyed by studentId
+  //         setMarks(marksMap); // Set marks state with the marksMap
+  //         console.log(marks);
+
   //       });
-  //       setMarks(marksMap);
   //     } else {
   //       throw new Error(`Error fetching marks: ${response.statusText}`);
   //     }
@@ -82,9 +87,13 @@ const AddMarks = () => {
   //   }
   // };
   
+
   const fetchExistingMarks = async () => {
     const authToken = localStorage.getItem("authToken");
-    if (!authToken) return console.error("Authentication token not found.");
+    if (!authToken) {
+      console.error("Authentication token not found.");
+      return;
+    }
   
     try {
       const response = await fetch(`http://localhost:8080/sms/mark/get/${term}/${year}/${subject}`, {
@@ -95,9 +104,9 @@ const AddMarks = () => {
         const data = await response.json();
         const marksMap = {};
         data.forEach((record) => {
-          marksMap[record.student] = record.marks; // Ensure marksMap is keyed by studentId
+          marksMap[record.student.accountId] = record.marks; // Ensure marksMap is keyed by studentId
         });
-        setMarks(marksMap); // Set marks state with the marksMap
+        setMarks(marksMap); // Set marks state with the complete marksMap
       } else {
         throw new Error(`Error fetching marks: ${response.statusText}`);
       }
@@ -105,6 +114,7 @@ const AddMarks = () => {
       console.error("Error:", error);
     }
   };
+
   
 
   useEffect(() => {
@@ -202,7 +212,7 @@ const AddMarks = () => {
               ].map(({ label, value, options, handler }, index) => (
                 <div className="col-md-2" key={index}>
                   <label className="form-label">{label}</label>
-                  <select className="form-control" value={value} onChange={(e) => handler(e.target.value)}>
+                  <select className="form-control text-center" value={value} onChange={(e) => handler(e.target.value)}>
                     <option value="">Select {label}</option>
                     {options.map((option, i) => (
                       <option key={i} value={option.value || option}>
@@ -225,40 +235,7 @@ const AddMarks = () => {
                       <th>Marks (Max {getMaxMarks()})</th>
                     </tr>
                   </thead>
-                  {/* <tbody>
-                    {students
-                      .filter((student) => student.studentClass === classLevel && student.section === section)
-                      .sort((a, b) => {
-                        switch (sortBy) {
-                          case "id":
-                            return a.accountId - b.accountId;
-                          case "name":
-                            return a.fullname.localeCompare(b.fullname);
-                          case "rollNumber":
-                            return a.rollNo - b.rollNo;
-                          default:
-                            return a.accountId - b.accountId;
-                        }
-                      })
-                      .map((student) => (
-                        <tr key={student.accountId}>
-                          <td>{student.fullname}</td>
-                          <td>{student.accountId}</td>
-                          <td>{student.rollNo}</td>
-                          <td>
-                            <input
-                              type="number"
-                              className="form-control"
-                              value={marks[student.accountId] || ""}
-                              onChange={(e) => handleMarksChange(student.accountId, e.target.value)}
-                              min={0}
-                              max={getMaxMarks()}
-                            />
-                            {errors[student.accountId] && <small className="text-danger">{errors[student.accountId]}</small>}
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody> */}
+                
 
 <tbody>
   {students
@@ -283,7 +260,7 @@ const AddMarks = () => {
         <td>
           <input
             type="number"
-            className="form-control"
+            className="form-control text-center"
             value={marks[student.accountId] || ""} // Display fetched marks here
             onChange={(e) => handleMarksChange(student.accountId, e.target.value)}
             min={0}
