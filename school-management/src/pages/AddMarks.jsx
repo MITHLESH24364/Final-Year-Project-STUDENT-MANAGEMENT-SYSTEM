@@ -58,12 +58,36 @@ const AddMarks = () => {
   };
 
 
+  // const fetchExistingMarks = async () => {
+  //   const authToken = localStorage.getItem("authToken");
+  //   if (!authToken) return console.error("Authentication token not found.");
+  
+  //   try {
+  //     const response = await fetch(`http://localhost:8080/sms/mark/get/${term}/${year}/${subject}`, {
+  //       headers: { Authorization: `Basic ${authToken}` },
+  //     });
+  
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       const marksMap = {};
+  //       data.forEach((record) => {
+  //         marksMap[record.student] = record.marks;
+  //       });
+  //       setMarks(marksMap);
+  //     } else {
+  //       throw new Error(`Error fetching marks: ${response.statusText}`);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
+  
   const fetchExistingMarks = async () => {
     const authToken = localStorage.getItem("authToken");
     if (!authToken) return console.error("Authentication token not found.");
   
     try {
-      const response = await fetch(`http://localhost:8080/sms/marks/get/${classLevel}/${section}/${term}/${year}/${subject}`, {
+      const response = await fetch(`http://localhost:8080/sms/mark/get/${term}/${year}/${subject}`, {
         headers: { Authorization: `Basic ${authToken}` },
       });
   
@@ -71,9 +95,9 @@ const AddMarks = () => {
         const data = await response.json();
         const marksMap = {};
         data.forEach((record) => {
-          marksMap[record.student] = record.marks;
+          marksMap[record.student] = record.marks; // Ensure marksMap is keyed by studentId
         });
-        setMarks(marksMap);
+        setMarks(marksMap); // Set marks state with the marksMap
       } else {
         throw new Error(`Error fetching marks: ${response.statusText}`);
       }
@@ -82,6 +106,7 @@ const AddMarks = () => {
     }
   };
   
+
   useEffect(() => {
     if (classLevel && section && term && year && subject) {
       fetchExistingMarks();
@@ -200,7 +225,7 @@ const AddMarks = () => {
                       <th>Marks (Max {getMaxMarks()})</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  {/* <tbody>
                     {students
                       .filter((student) => student.studentClass === classLevel && student.section === section)
                       .sort((a, b) => {
@@ -233,7 +258,43 @@ const AddMarks = () => {
                           </td>
                         </tr>
                       ))}
-                  </tbody>
+                  </tbody> */}
+
+<tbody>
+  {students
+    .filter((student) => student.studentClass === classLevel && student.section === section)
+    .sort((a, b) => {
+      switch (sortBy) {
+        case "id":
+          return a.accountId - b.accountId;
+        case "name":
+          return a.fullname.localeCompare(b.fullname);
+        case "rollNumber":
+          return a.rollNo - b.rollNo;
+        default:
+          return a.accountId - b.accountId;
+      }
+    })
+    .map((student) => (
+      <tr key={student.accountId}>
+        <td>{student.fullname}</td>
+        <td>{student.accountId}</td>
+        <td>{student.rollNo}</td>
+        <td>
+          <input
+            type="number"
+            className="form-control"
+            value={marks[student.accountId] || ""} // Display fetched marks here
+            onChange={(e) => handleMarksChange(student.accountId, e.target.value)}
+            min={0}
+            max={getMaxMarks()}
+          />
+          {errors[student.accountId] && <small className="text-danger">{errors[student.accountId]}</small>}
+        </td>
+      </tr>
+    ))}
+</tbody>
+
                 </table>
               </div>
             )}

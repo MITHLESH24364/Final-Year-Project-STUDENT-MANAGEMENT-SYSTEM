@@ -254,6 +254,15 @@ const Sidebar = () => {
       ],
     },
     {
+      title: "Sections",
+      icon: "fas fa-building",
+      submenu: [
+        {path: "/view-section", label: "Section List"},
+        {path: "/add-section", label: "Section Add"},
+        {path: "/edit-section", label: "Section Edit"},
+      ],
+    },
+    {
       title: "Contact",
       icon: "fas fa-check",
       submenu: [

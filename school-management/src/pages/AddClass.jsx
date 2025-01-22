@@ -3,7 +3,6 @@ import React, { useState } from "react";
 const AddClass = () => {
   const [formData, setFormData] = useState({
     className: "",
-    section: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -36,7 +35,7 @@ const AddClass = () => {
       if (response.ok) {
         const data = await response.json();
         setSuccessMessage("Class added successfully!");
-        setFormData({ className: "", section: "" });
+        setFormData({ className: "" });
       } else {
         const errorData = await response.json();
         const errorMessage =
@@ -85,22 +84,6 @@ const AddClass = () => {
                       name="className"
                       className="form-control"
                       value={formData.className}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="col-12 col-sm-4">
-                  <div className="form-group local-forms">
-                    <label>
-                      Section <span className="login-danger">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="section"
-                      className="form-control"
-                      value={formData.section}
                       onChange={handleChange}
                       required
                     />

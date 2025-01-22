@@ -2,55 +2,71 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 
-const EditClass = ({ classId }) => {
+const EditSection = () => {
   const [formData, setFormData] = useState({
-    className: "",
-    section: "",
+    sectionName: "",
+    classId: "",
   });
-
-    const { id } = useParams();
-
-
+  const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
-  useEffect(() => {
-    const fetchClassDetails = async () => {
-    if (id) {
-        const authToken = localStorage.getItem("authToken");
-        if (!authToken) {
-        console.error("Authentication token not found. Please log in.");
-        return;
-        }
+  const { id } = useParams();  // Extract the section ID from the URL
 
+  useEffect(() => {
+    const fetchClasses = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/sms/classes/${id}`, {
+        const response = await fetch("http://localhost:8080/sms/classes/all", {
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Basic ${authToken}`,
+            Authorization: `Basic ${localStorage.getItem("authToken")}`,
           },
         });
-
         if (response.ok) {
           const data = await response.json();
-          setFormData({
-            className: data.className,
-            section: data.section,
-          });
+          setClasses(data);
         } else {
-          const errorData = await response.json();
-          setError(errorData.message || "Failed to fetch class details.");
+          setError("Failed to fetch classes.");
         }
       } catch (error) {
-        setError("An error occurred. Please check your connection and try again.");
-      } finally {
-        setLoading(false);
+        setError("An error occurred while fetching classes.");
       }
-    }
     };
 
-    fetchClassDetails();
+    const fetchSectionDetails = async () => {
+      if (id) {
+        const authToken = localStorage.getItem("authToken");
+        if (!authToken) {
+          console.error("Authentication token not found. Please log in.");
+          return;
+        }
+
+        try {
+          const response = await fetch(`http://localhost:8080/sms/sections/${id}`, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Basic ${authToken}`,
+            },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            setFormData({
+              sectionName: data.sectionName,
+              classId: data.classId,
+            });
+          } else {
+            const errorData = await response.json();
+            setError(errorData.message || "Failed to fetch section details.");
+          }
+        } catch (error) {
+          setError("An error occurred. Please check your connection and try again.");
+        }
+      }
+    };
+
+    fetchClasses();
+    fetchSectionDetails();
   }, [id]);
 
   const handleChange = (e) => {
@@ -58,51 +74,16 @@ const EditClass = ({ classId }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     setError("");
-//     setSuccessMessage("");
-
-//     const authToken = localStorage.getItem("authToken");
-
-//     try {
-//       const response = await fetch(`http://localhost:8080/sms/classes/update/${id}`, {
-//         method: "PUT",
-//         body: JSON.stringify(formData),
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Basic ${authToken}`,
-//         },
-//       });
-
-//       if (response.ok) {
-//         const data = await response.json();
-//         setSuccessMessage("Class updated successfully!");
-//       } else {
-//         const errorData = await response.json();
-//         const errorMessage =
-//           errorData.message || "Failed to update class. Please try again.";
-//         setError(errorMessage);
-//       }
-//     } catch (error) {
-//       setError("An error occurred. Please check your connection and try again.");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(""); // Clear error before making the request
     setSuccessMessage("");
-  
+
     const authToken = localStorage.getItem("authToken");
-  
+
     try {
-      const response = await fetch(`http://localhost:8080/sms/classes/update/${id}`, {
+      const response = await fetch(`http://localhost:8080/sms/sections/update/${id}`, {
         method: "PUT",
         body: JSON.stringify(formData),
         headers: {
@@ -110,15 +91,15 @@ const handleSubmit = async (e) => {
           Authorization: `Basic ${authToken}`,
         },
       });
-  
+
       if (response.ok) {
         const data = await response.json();
-        setSuccessMessage("Class updated successfully!");
+        setSuccessMessage("Section updated successfully!");
         setError(""); // Clear any residual error message
       } else {
         const errorData = await response.json();
         const errorMessage =
-          errorData.message || "Failed to update class. Please try again.";
+          errorData.message || "Failed to update section. Please try again.";
         setError(errorMessage);
       }
     } catch (error) {
@@ -127,8 +108,6 @@ const handleSubmit = async (e) => {
       setLoading(false);
     }
   };
-  
-
 
   return (
     <div className="row">
@@ -139,7 +118,7 @@ const handleSubmit = async (e) => {
               <div className="row">
                 <div className="col-12">
                   <h5 className="form-title">
-                    <span>Edit Class Details</span>
+                    <span>Edit Section Details</span>
                   </h5>
                 </div>
 
@@ -158,34 +137,40 @@ const handleSubmit = async (e) => {
                 <div className="col-12 col-sm-4">
                   <div className="form-group local-forms">
                     <label>
-                      Class Name <span className="login-danger">*</span>
+                      Select Class <span className="login-danger">*</span>
+                    </label>
+                    <select
+                      name="classId"
+                      className="form-control"
+                      value={formData.classId}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">-- Select Class --</option>
+                      {classes.map((classItem) => (
+                        <option key={classItem.id} value={classItem.id}>
+                          {classItem.className || "Class Name"}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="col-12 col-sm-4">
+                  <div className="form-group local-forms">
+                    <label>
+                      Section Name <span className="login-danger">*</span>
                     </label>
                     <input
                       type="text"
-                      name="className"
+                      name="sectionName"
                       className="form-control"
-                      value={formData.className}
+                      value={formData.sectionName}
                       onChange={handleChange}
                       required
                     />
                   </div>
                 </div>
-{/* 
-                <div className="col-12 col-sm-4">
-                  <div className="form-group local-forms">
-                    <label>
-                      Section <span className="login-danger">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="section"
-                      className="form-control"
-                      value={formData.section}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                </div> */}
 
                 <div className="col-12">
                   <div className="student-submit">
@@ -207,4 +192,4 @@ const handleSubmit = async (e) => {
   );
 };
 
-export default EditClass;
+export default EditSection;

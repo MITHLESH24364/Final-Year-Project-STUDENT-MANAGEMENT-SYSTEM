@@ -1,30 +1,29 @@
 import React, { useState, useEffect } from "react";
 
-const ViewClass = () => {
-  const [classes, setClasses] = useState([]);
+const ViewSection = () => {
+  const [sections, setSections] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
-const fetchClasses = async () => {
+  const fetchSections = async () => {
     const authToken = localStorage.getItem("authToken");
-  
+
     if (!authToken) {
       console.error("No auth token found");
       setLoading(false);
       return;
     }
-  
+
     try {
-      const response = await fetch("http://localhost:8080/sms/classes/all", {
+      const response = await fetch("http://localhost:8080/sms/sections/all", {
         headers: {
           Authorization: `Basic ${authToken}`,
         },
       });
-  
+
       const contentType = response.headers.get("Content-Type");
       if (response.ok && contentType && contentType.includes("application/json")) {
         const data = await response.json();
-        setClasses(data);
+        setSections(data);
       } else {
         throw new Error("Invalid response format");
       }
@@ -34,11 +33,9 @@ const fetchClasses = async () => {
       setLoading(false);
     }
   };
-  
-
 
   useEffect(() => {
-    fetchClasses();
+    fetchSections();
   }, []);
 
   return (
@@ -48,18 +45,18 @@ const fetchClasses = async () => {
         <div className="page-header">
           <div className="row align-items-center">
             <div className="col">
-              <h3 className="page-title">Classes</h3>
+              <h3 className="page-title">Sections</h3>
               <ul className="breadcrumb">
                 <li className="breadcrumb-item">
                   <a href="index.html">Dashboard</a>
                 </li>
-                <li className="breadcrumb-item active">Classes</li>
+                <li className="breadcrumb-item active">Sections</li>
               </ul>
             </div>
           </div>
         </div>
 
-        {/* Class List */}
+        {/* Section List */}
         <div className="row">
           <div className="col-sm-12">
             <div className="card card-table">
@@ -68,13 +65,13 @@ const fetchClasses = async () => {
                 <div className="page-header">
                   <div className="row align-items-center">
                     <div className="col">
-                      <h3 className="page-title">Classes</h3>
+                      <h3 className="page-title">Sections</h3>
                     </div>
                     <div className="col-auto text-end float-end ms-auto download-grp">
                       <a href="#" className="btn btn-outline-primary me-2">
                         <i className="fas fa-download"></i> Download
                       </a>
-                      <a href="/add-class" className="btn btn-primary">
+                      <a href="/add-section" className="btn btn-primary">
                         <i className="fas fa-plus"></i>
                       </a>
                     </div>
@@ -96,6 +93,7 @@ const fetchClasses = async () => {
                           </div>
                         </th>
                         <th>ID</th>
+                        <th>Section</th>
                         <th>Class</th>
                         <th className="text-end">Action</th>
                       </tr>
@@ -107,36 +105,37 @@ const fetchClasses = async () => {
                             Loading...
                           </td>
                         </tr>
-                      ) : classes.length === 0 ? (
+                      ) : sections.length === 0 ? (
                         <tr>
                           <td colSpan="5" className="text-center">
-                            No classes found
+                            No sections found
                           </td>
                         </tr>
                       ) : (
-                        classes.map((classItem, index) => (
+                        sections.map((section, index) => (
                           <tr key={index}>
                             <td>
                               <div className="form-check check-tables">
                                 <input
                                   className="form-check-input"
                                   type="checkbox"
-                                  value={classItem.id}
+                                  value={section.id}
                                 />
                               </div>
                             </td>
-                            <td>{classItem.id}</td>
-                            <td>{classItem.className}</td>
+                            <td>{section.id}</td>
+                            <td>{section.sectionName}</td>
+                            <td>{section.classId}</td>
                             <td className="text-end">
                               <div className="actions">
                                 <a
-                                  href={`/edit-class/${classItem.id}`}
+                                  href={`/edit-section/${section.id}`}
                                   className="btn btn-sm bg-danger-light"
                                 >
                                   <i className="feather-edit"></i>
                                 </a>
                                 <a
-                                  href={`/delete-class/${classItem.id}`}
+                                  href={`/delete-section/${section.id}`}
                                   className="btn btn-sm bg-success-light me-2"
                                 >
                                   <i className="feather-trash-2"></i>
@@ -158,4 +157,4 @@ const fetchClasses = async () => {
   );
 };
 
-export default ViewClass;
+export default ViewSection;

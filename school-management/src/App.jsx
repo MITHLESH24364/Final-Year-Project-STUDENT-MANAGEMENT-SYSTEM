@@ -32,6 +32,10 @@ import ViewClass from './pages/ViewClass';
 import AddClass from './pages/AddClass';
 import EditClass from './pages/EditClass';
 import DeleteClass from './pages/DeleteClass';
+import ViewSection from './pages/ViewSection';
+import AddSection from './pages/AddSection';
+import EditSection from './pages/EditSection';
+
 
 
 
@@ -97,6 +101,11 @@ function App() {
                     <Route path="edit-class" element={<PrivateRout component= {EditClass} />} />
                     <Route path="edit-class/:id" element={<PrivateRout component= {EditClass} />} />
                     <Route path="delete-class/:id" element={<PrivateRout component= {DeleteClass} />} />
+                    <Route path="view-section" element={<PrivateRout component= {ViewSection} />} />
+                    <Route path="add-section" element={<PrivateRout component= {AddSection} />} />
+                    <Route path="edit-section" element={<PrivateRout component= {EditSection} />} />
+                    <Route path="edit-section/:id" element={<PrivateRout component= {EditSection} />} />
+
 
 
 
