@@ -212,7 +212,7 @@ const AddMarks = () => {
               ].map(({ label, value, options, handler }, index) => (
                 <div className="col-md-2" key={index}>
                   <label className="form-label">{label}</label>
-                  <select className="form-control text-center" value={value} onChange={(e) => handler(e.target.value)}>
+                  <select className="form-control" value={value} onChange={(e) => handler(e.target.value)}>
                     <option value="">Select {label}</option>
                     {options.map((option, i) => (
                       <option key={i} value={option.value || option}>
